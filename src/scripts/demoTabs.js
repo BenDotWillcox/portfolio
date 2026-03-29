@@ -26,22 +26,29 @@ export default function initDemoTabs() {
       if (targetWrapper) {
         targetWrapper.style.display = "block";
 
-        // Lazy-load: set src from data-src if not yet loaded
         const iframe = targetWrapper.querySelector("iframe");
-        if (iframe && !iframe.src && iframe.dataset.src) {
-          iframe.dataset.loaded = "loading";
-          iframe.src = iframe.dataset.src;
+        if (iframe && iframe.dataset.src) {
+          const canonicalUrl = iframe.dataset.src;
 
-          iframe.addEventListener("load", () => {
-            iframe.dataset.loaded = "true";
-            const loading = targetWrapper.querySelector(".demo-loading");
-            if (loading) loading.style.display = "none";
-          });
+          if (!iframe.src) {
+            // First load: set src and wire up load/error handlers
+            iframe.dataset.loaded = "loading";
+            iframe.src = canonicalUrl;
 
-          // Fallback if iframe fails (X-Frame-Options block)
-          iframe.addEventListener("error", () => {
-            handleIframeFallback(targetWrapper, iframe.dataset.src);
-          });
+            iframe.addEventListener("load", () => {
+              iframe.dataset.loaded = "true";
+              const loading = targetWrapper.querySelector(".demo-loading");
+              if (loading) loading.style.display = "none";
+            });
+
+            iframe.addEventListener("error", () => {
+              handleIframeFallback(targetWrapper, canonicalUrl);
+            });
+          } else {
+            // Already loaded — reset to the canonical URL for this tab
+            // so in-iframe navigation doesn't persist across tab switches
+            iframe.src = canonicalUrl;
+          }
         }
       }
 
