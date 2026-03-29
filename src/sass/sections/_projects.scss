@@ -1,77 +1,346 @@
 #projects {
   background-color: $white-color;
   color: $dark-blue-text;
-  margin-top: -10rem;
-  padding-top: 15rem;
-
-  @include respond(tab-land) {
-    margin-top: 0;
-    padding-top: 5rem;
-  }
+  padding-top: 5rem;
 
   .project-wrapper {
-    margin-bottom: 15rem;
+    margin-bottom: 8rem;
 
     @include respond(phone) {
       margin-bottom: 0rem;
     }
+  }
+}
 
-    .row {
-      margin-bottom: 8rem;
+// Individual project card
+.project-card {
+  margin-bottom: 6rem;
+  padding-bottom: 6rem;
+  border-bottom: 1px solid $light-grey;
 
-      @include respond(phone) {
-        margin-bottom: 4rem;
-      }
+  @include respond(phone) {
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+// Project header (title + status + tags)
+.project-header {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.project-title {
+  font-weight: bold;
+  font-size: $mid-font-size;
+  margin: 0;
+
+  @include respond(phone) {
+    font-size: 2rem;
+  }
+}
+
+// Status badges
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 1rem;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+
+  &::before {
+    content: "";
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+  }
+
+  &--live {
+    background: rgba($live-color, 0.1);
+    color: darken($live-color, 10%);
+
+    &::before {
+      background: $live-color;
     }
+  }
 
-    &__text {
-      text-align: left;
+  &--in-progress {
+    background: rgba($in-progress-color, 0.1);
+    color: darken($in-progress-color, 10%);
 
-      @include respond(phone) {
-        margin-bottom: 2.5rem !important;
+    &::before {
+      background: $in-progress-color;
+    }
+  }
+
+  &--deploying {
+    background: rgba($deploying-color, 0.1);
+    color: darken($deploying-color, 10%);
+
+    &::before {
+      background: $deploying-color;
+    }
+  }
+}
+
+// Tech tags
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.tech-tag {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border-radius: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: $tag-bg;
+  color: $dark-blue-text;
+  border: 1px solid $tag-border;
+}
+
+// Project description
+.project-description {
+  font-size: $default-font-size;
+  line-height: 1.7;
+  margin-bottom: 2.4rem;
+  max-width: 90ch;
+
+  p {
+    margin-bottom: 1rem;
+  }
+}
+
+// Project links
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+// Demo section
+.demo-section {
+  margin-top: 2.4rem;
+}
+
+.demo-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+  border-bottom: 2px solid $light-grey;
+}
+
+.demo-tab {
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  color: darken($light-grey, 20%);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $dark-blue-text;
+  }
+
+  &.active {
+    color: $primary-color;
+    border-bottom-color: $primary-color;
+  }
+}
+
+.demo-container {
+  position: relative;
+  background: #f8f9fa;
+  border: 1px solid $light-grey;
+  border-top: none;
+  border-radius: 0 0 0.8rem 0.8rem;
+  overflow: hidden;
+}
+
+.demo-iframe-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; // 16:9 aspect ratio
+  max-height: 600px;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}
+
+.demo-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.4rem;
+  color: darken($light-grey, 20%);
+}
+
+.demo-fallback {
+  display: none;
+  padding: 3rem;
+  text-align: center;
+  font-size: 1.4rem;
+  color: darken($light-grey, 20%);
+
+  a {
+    color: $primary-color;
+    font-weight: 600;
+  }
+}
+
+// Code snippets
+.code-snippet {
+  margin: 2.4rem 0;
+  border-radius: 0.8rem;
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.6rem;
+    background: darken($code-bg, 5%);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: $code-comment;
+  }
+
+  &__lang {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__file {
+    font-family: "Courier New", monospace;
+    font-weight: 400;
+  }
+
+  pre {
+    margin: 0;
+    padding: 1.6rem;
+    background: $code-bg;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  code {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: $code-text;
+
+    @include respond(phone) {
+      font-size: 1.1rem;
+    }
+  }
+
+  .keyword { color: $code-keyword; }
+  .string { color: $code-string; }
+  .comment { color: $code-comment; font-style: italic; }
+  .number { color: $code-number; }
+  .function { color: #89b4fa; }
+  .type { color: #f9e2af; }
+  .operator { color: #89dceb; }
+}
+
+// Math block
+.math-block {
+  margin: 2.4rem 0;
+  padding: 2rem 2.4rem;
+  background: #f8f9fa;
+  border-left: 4px solid $primary-color;
+  border-radius: 0 0.8rem 0.8rem 0;
+
+  &__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $primary-color;
+    margin-bottom: 1.2rem;
+  }
+
+  &__formula {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 1.5rem;
+    line-height: 2;
+    color: $dark-blue-text;
+
+    @include respond(phone) {
+      font-size: 1.3rem;
+    }
+  }
+
+  &__description {
+    font-size: 1.3rem;
+    color: darken($light-grey, 30%);
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+}
+
+// Progress section for in-progress projects
+.project-progress {
+  margin: 2rem 0;
+
+  &__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0.4rem 0;
+      font-size: 1.4rem;
+      line-height: 1.5;
+
+      &::before {
+        display: inline-block;
+        width: 2rem;
+        margin-right: 0.4rem;
+        text-align: center;
       }
-      @include respond(tab-land) {
-        margin-bottom: 4.8rem;
-      }
 
-      &-title {
+      &.done::before {
+        content: "\2713";
+        color: $live-color;
         font-weight: bold;
-        margin-bottom: 1.8rem;
-        font-size: $mid-font-size;
-
-        @include respond(phone) {
-          font-size: 2rem;
-        }
       }
 
-      & p > a {
-        color: $secondary-color;
-      }
-    }
-
-    &__image {
-      width: 90%;
-      margin: 0 auto;
-
-      @include respond(tab-land) {
-        width: 100%;
-        margin: 0;
-      }
-
-      & .thumbnail {
-        border: none;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-        transition: all 0.2s ease-out;
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
-        transition: 0.5s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
-          0.5s box-shadow,
-          0.5s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
-
-        @include respond(phone) {
-          border: 1px solid $light-grey;
-          box-shadow: none;
-          margin-bottom: 3.2rem;
-        }
+      &.todo::before {
+        content: "\25CB";
+        color: $in-progress-color;
       }
     }
   }

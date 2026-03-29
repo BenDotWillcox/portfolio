@@ -9,6 +9,23 @@ $light-grey: #d2d2d2;
 
 $dark-blue-text: #272341; // For Headings
 
+// Code block colors
+$code-bg: #1e1e2e;
+$code-text: #cdd6f4;
+$code-keyword: #cba6f7;
+$code-string: #a6e3a1;
+$code-comment: #6c7086;
+$code-number: #fab387;
+
+// Tech tags
+$tag-bg: rgba(2, 170, 176, 0.1);
+$tag-border: rgba(2, 170, 176, 0.3);
+
+// Status badges
+$live-color: #10b981;
+$in-progress-color: #f59e0b;
+$deploying-color: #6366f1;
+
 // FONT SIZE
 $default-font-size: 1.6rem;
 $big-font-size: 4rem;

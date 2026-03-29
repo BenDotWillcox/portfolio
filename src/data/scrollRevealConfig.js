@@ -44,17 +44,19 @@ export const targetElements = [
     },
   },
   {
-    element: ".project-wrapper__text",
+    element: ".skill-category",
     animation: {
-      delay: 500,
-      origin: window.innerWidth > 768 ? "left" : "bottom",
+      delay: 300,
+      distance: "20px",
+      origin: "bottom",
+      interval: 100,
     },
   },
   {
-    element: ".project-wrapper__image",
+    element: ".project-card",
     animation: {
-      delay: 1000,
-      origin: window.innerWidth > 768 ? "right" : "bottom",
+      delay: 300,
+      origin: "bottom",
     },
   },
   {

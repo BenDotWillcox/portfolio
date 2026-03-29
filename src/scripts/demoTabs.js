@@ -1,0 +1,89 @@
+/**
+ * Demo Tabs — handles iframe tab switching and lazy loading for project demos.
+ */
+export default function initDemoTabs() {
+  const tabButtons = document.querySelectorAll(".demo-tab");
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const project = btn.closest(".project-card");
+      if (!project) return;
+
+      // Update active tab
+      project.querySelectorAll(".demo-tab").forEach((t) => t.classList.remove("active"));
+      btn.classList.add("active");
+
+      const targetId = btn.dataset.target;
+      const container = project.querySelector(".demo-container");
+      if (!container) return;
+
+      // Hide all iframe wrappers, show the target
+      container.querySelectorAll(".demo-iframe-wrapper").forEach((w) => {
+        w.style.display = "none";
+      });
+      const targetWrapper = container.querySelector(`#${targetId}`);
+      if (targetWrapper) {
+        targetWrapper.style.display = "block";
+
+        // Lazy-load: set src from data-src if not yet loaded
+        const iframe = targetWrapper.querySelector("iframe");
+        if (iframe && !iframe.src && iframe.dataset.src) {
+          iframe.dataset.loaded = "loading";
+          iframe.src = iframe.dataset.src;
+
+          iframe.addEventListener("load", () => {
+            iframe.dataset.loaded = "true";
+            const loading = targetWrapper.querySelector(".demo-loading");
+            if (loading) loading.style.display = "none";
+          });
+
+          // Fallback if iframe fails (X-Frame-Options block)
+          iframe.addEventListener("error", () => {
+            handleIframeFallback(targetWrapper, iframe.dataset.src);
+          });
+        }
+      }
+    });
+  });
+
+  // Auto-activate the first tab in each project on page load
+  document.querySelectorAll(".project-card").forEach((project) => {
+    const firstTab = project.querySelector(".demo-tab");
+    if (firstTab) firstTab.click();
+  });
+
+  // Intersection observer for lazy loading single-tab demos
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const iframe = entry.target.querySelector("iframe[data-src]:not([src])");
+          if (iframe) {
+            iframe.src = iframe.dataset.src;
+            iframe.addEventListener("load", () => {
+              iframe.dataset.loaded = "true";
+              const loading = entry.target.querySelector(".demo-loading");
+              if (loading) loading.style.display = "none";
+            });
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: "200px" }
+  );
+
+  document.querySelectorAll(".demo-iframe-wrapper").forEach((wrapper) => {
+    observer.observe(wrapper);
+  });
+}
+
+function handleIframeFallback(wrapper, url) {
+  const fallback = wrapper.querySelector(".demo-fallback");
+  const iframe = wrapper.querySelector("iframe");
+  if (fallback) {
+    fallback.style.display = "block";
+    fallback.innerHTML = `This demo cannot be embedded. <a href="${url}" target="_blank" rel="noreferrer">Open in a new tab &rarr;</a>`;
+  }
+  if (iframe) iframe.style.display = "none";
+}
