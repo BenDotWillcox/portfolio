@@ -262,18 +262,53 @@
               </div>
             </div>
 
-            <!-- Math: Elo Formula -->
-            <div class="math-block">
-              <div class="math-block__title">Elo Rating Algorithm</div>
-              <div class="math-block__formula">
-                E(win) = 1 / (1 + 10<sup>(R<sub>loser</sub> - R<sub>winner</sub>) / 1000</sup>)<br />
-                MoV = ln(5.95 &times; &radic;(scoreDiff + 1))<br />
-                &Delta;Elo = K &times; MoV &times; (1 - E(win))
+            <!-- Tab-specific explainers -->
+            <div class="tab-explainer" data-for-tab="valo-rankings">
+              <div class="math-block">
+                <div class="math-block__title">Elo Rating Algorithm</div>
+                <div class="math-block__formula">
+                  E(win) = 1 / (1 + 10<sup>(R<sub>loser</sub> - R<sub>winner</sub>) / 1000</sup>)<br />
+                  MoV = ln(5.95 &times; &radic;(scoreDiff + 1))<br />
+                  &Delta;Elo = K &times; MoV &times; (1 - E(win))
+                </div>
+                <div class="math-block__description">
+                  Each team holds <strong>separate Elo ratings per map</strong> &mdash; the rankings page
+                  shows these side by side. The margin-of-victory factor uses logarithmic scaling so
+                  blowouts shift ratings more than close games. K-factor (74) and rating scale (1000)
+                  were optimized via grid search to maximize prediction accuracy.
+                </div>
               </div>
-              <div class="math-block__description">
-                Each team holds separate Elo ratings per map. The margin-of-victory factor uses logarithmic
-                scaling to weight blowouts vs. close games. K-factor (74) and rating scale (1000) were
-                optimized via grid search to maximize prediction accuracy.
+            </div>
+
+            <div class="tab-explainer" data-for-tab="valo-predictions">
+              <div class="math-block">
+                <div class="math-block__title">Match Prediction &mdash; Combinatorial Probability</div>
+                <div class="math-block__formula">
+                  P(BO3 win) = p<sub>1</sub>p<sub>2</sub> + p<sub>1</sub>(1-p<sub>2</sub>)p<sub>3</sub> + (1-p<sub>1</sub>)p<sub>2</sub>p<sub>3</sub>
+                </div>
+                <div class="math-block__description">
+                  The predictions page calculates win probability by enumerating <strong>every possible
+                  map outcome</strong>. For BO3: 3 winning paths (2-0, 1-1-win). For BO5: all 10
+                  paths to 3 wins. Each map&rsquo;s individual win probability comes from the Elo
+                  ratings shown on the rankings page.
+                </div>
+              </div>
+              <div class="code-snippet">
+                <div class="code-snippet__header">
+                  <span class="code-snippet__lang">TypeScript</span>
+                  <span class="code-snippet__file">lib/predictions/map-selection.ts</span>
+                </div>
+                <pre><code><span class="comment">// Optimal map selection: each team bans their worst map</span>
+<span class="comment">// then picks their best from the remaining pool</span>
+<span class="keyword">const</span> team1Ban = Object.<span class="function">values</span>(team1Probabilities)
+  .<span class="function">filter</span>(p <span class="operator">=&gt;</span> remainingMaps.<span class="function">has</span>(p.map))
+  .<span class="function">sort</span>((a, b) <span class="operator">=&gt;</span> a.probability <span class="operator">-</span> b.probability)[<span class="number">0</span>]?.map;
+
+<span class="comment">// After bans, teams pick maps where they have</span>
+<span class="comment">// the highest win probability (game theory optimal)</span>
+<span class="keyword">const</span> team1Pick = Object.<span class="function">values</span>(team1Probabilities)
+  .<span class="function">filter</span>(p <span class="operator">=&gt;</span> remainingMaps.<span class="function">has</span>(p.map))
+  .<span class="function">sort</span>((a, b) <span class="operator">=&gt;</span> b.probability <span class="operator">-</span> a.probability)[<span class="number">0</span>]?.map;</code></pre>
               </div>
             </div>
           </div>
@@ -347,13 +382,25 @@
               </div>
             </div>
 
-            <!-- Code: Bitmask optimization -->
-            <div class="code-snippet">
-              <div class="code-snippet__header">
-                <span class="code-snippet__lang">TypeScript</span>
-                <span class="code-snippet__file">lib/engine/fast-sim.ts</span>
+            <!-- Tab-specific explainer -->
+            <div class="tab-explainer" data-for-tab="wc-draw">
+              <div class="math-block">
+                <div class="math-block__title">Constraint Satisfaction via Recursive Backtracking</div>
+                <div class="math-block__description">
+                  The simulator enforces all FIFA rules in real-time: max 2 UEFA teams per group,
+                  max 1 from any other confederation, and <strong>side-pairing constraints</strong>
+                  (Spain/Argentina and France/England must land on opposite bracket sides). When you
+                  drag a team, the engine runs a chained backtracking validation across Pots 2&rarr;3&rarr;4
+                  to verify the remaining teams can still complete a valid draw. Monte Carlo statistics
+                  are pre-computed from <strong>1 million simulated draws</strong>.
+                </div>
               </div>
-              <pre><code><span class="comment">// Bitmask-encoded confederations for O(1) constraint checks</span>
+              <div class="code-snippet">
+                <div class="code-snippet__header">
+                  <span class="code-snippet__lang">TypeScript</span>
+                  <span class="code-snippet__file">lib/engine/fast-sim.ts</span>
+                </div>
+                <pre><code><span class="comment">// Bitmask-encoded confederations for O(1) constraint checks</span>
 <span class="comment">// in the Monte Carlo simulation loop (1M iterations)</span>
 <span class="keyword">const</span> CONF_BITS = {
   AFC: <span class="number">1</span>, CAF: <span class="number">2</span>, CONCACAF: <span class="number">4</span>,
@@ -367,6 +414,7 @@
   }
   <span class="keyword">return</span> (groupMask <span class="operator">&amp;</span> teamConf) <span class="operator">===</span> <span class="number">0</span>;
 }</code></pre>
+              </div>
             </div>
           </div>
           <!-- /END World Cup Draw -->
@@ -451,6 +499,38 @@
                 </div>
               </div>
             </div>
+
+            <!-- Tab-specific explainers -->
+            <div class="tab-explainer" data-for-tab="mm-teams">
+              <div class="math-block">
+                <div class="math-block__title">Multi-System Rating Normalization</div>
+                <div class="math-block__formula">
+                  normalized = (value - min) / (max - min) &times; 100<br />
+                  color = HSL( normalized / 100 &times; 120&deg;, 78%, 46% )
+                </div>
+                <div class="math-block__description">
+                  The team sheets integrate <strong>4 independent ranking systems</strong> (NET, KenPom,
+                  EvanMiya, Torvik) that use different scales. The normalization system dynamically computes
+                  min/max bounds across all teams, then maps every metric to a 0&ndash;100% scale. Defense
+                  metrics are <strong>direction-inverted</strong> (lower is better &rarr; higher normalized score).
+                  The resulting percentages drive color-coded gauges from red (0%) through yellow (50%) to green (100%).
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="mm-compare">
+              <div class="math-block">
+                <div class="math-block__title">Radar Chart Comparison &mdash; Counterpart Mode</div>
+                <div class="math-block__description">
+                  The compare page offers two radar modes: <strong>like-for-like</strong> (same metrics
+                  overlaid) and <strong>counterpart</strong> (Team A&rsquo;s offense vs. Team B&rsquo;s defense).
+                  In counterpart mode, mirrored axis pairs (e.g., 2FG% vs. 2FG%D, FTRate vs. FTRateD) reveal
+                  how each team&rsquo;s strengths match up against the other&rsquo;s weaknesses. All 16+ metrics
+                  are normalized to the same 0&ndash;100 scale so the radar shape is meaningful, not distorted
+                  by differing units.
+                </div>
+              </div>
+            </div>
           </div>
           <!-- /END March Madness -->
 
@@ -532,13 +612,25 @@
               </div>
             </div>
 
-            <!-- Code: Data processing -->
-            <div class="code-snippet">
-              <div class="code-snippet__header">
-                <span class="code-snippet__lang">TypeScript</span>
-                <span class="code-snippet__file">lib/cooper-data.ts</span>
+            <!-- Tab-specific explainers -->
+            <div class="tab-explainer" data-for-tab="cooper-teams">
+              <div class="math-block">
+                <div class="math-block__title">Draggable Year-Range Comparison</div>
+                <div class="math-block__description">
+                  The Team Explorer renders multi-team Elo trend lines on a Recharts line chart, then overlays
+                  a <strong>draggable reference area</strong>. Clicking the chart activates the nearest
+                  handle (left or right boundary); dragging constrains handles so they can&rsquo;t cross.
+                  The side panel computes <strong>average Elo within the selected window</strong> and
+                  ranks all selected teams, letting you answer questions like &ldquo;Who was the best
+                  program of the 1990s?&rdquo; Team logos appear at each team&rsquo;s peak Elo point on the chart.
+                </div>
               </div>
-              <pre><code><span class="comment">// Compute average Elo for selected teams within a season range</span>
+              <div class="code-snippet">
+                <div class="code-snippet__header">
+                  <span class="code-snippet__lang">TypeScript</span>
+                  <span class="code-snippet__file">lib/cooper-data.ts</span>
+                </div>
+                <pre><code><span class="comment">// Compute average Elo for selected teams within a season range</span>
 <span class="keyword">export function</span> <span class="function">getSeasonAverages</span>(
   rows: <span class="type">CooperRow</span>[],
   startYear: <span class="type">number</span>,
@@ -558,6 +650,21 @@
     ])
   );
 }</code></pre>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="cooper-rankings">
+              <div class="math-block">
+                <div class="math-block__title">3D Flip-Card Rankings with Dual Range Slider</div>
+                <div class="math-block__description">
+                  The rankings page uses a <strong>dual-thumb range slider</strong> to select a start and
+                  end season, then computes average Elo for every team within that window. The top 25
+                  are displayed as <strong>CSS 3D flip cards</strong> (perspective + rotateY transform)
+                  &mdash; the front shows rank, logo, and Elo; hovering reveals the back with the team
+                  name, total Elo sum, and season count. Cards are color-coded with each team&rsquo;s
+                  primary color for instant visual recognition.
+                </div>
+              </div>
             </div>
           </div>
           <!-- /END Cooper Visualization -->

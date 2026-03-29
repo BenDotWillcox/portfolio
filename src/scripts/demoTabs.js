@@ -1,5 +1,6 @@
 /**
- * Demo Tabs — handles iframe tab switching and lazy loading for project demos.
+ * Demo Tabs — handles iframe tab switching, lazy loading, and
+ * contextual explainer toggling for project demos.
  */
 export default function initDemoTabs() {
   const tabButtons = document.querySelectorAll(".demo-tab");
@@ -43,6 +44,20 @@ export default function initDemoTabs() {
           });
         }
       }
+
+      // Toggle tab-specific explainers
+      project.querySelectorAll(".tab-explainer").forEach((ex) => {
+        if (ex.dataset.forTab === targetId) {
+          ex.style.display = "block";
+          ex.style.opacity = "0";
+          requestAnimationFrame(() => {
+            ex.style.transition = "opacity 0.3s ease";
+            ex.style.opacity = "1";
+          });
+        } else {
+          ex.style.display = "none";
+        }
+      });
     });
   });
 
