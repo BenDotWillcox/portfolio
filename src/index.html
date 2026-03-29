@@ -237,26 +237,52 @@
               <div class="demo-tabs">
                 <button class="demo-tab active" data-target="valo-rankings">Rankings</button>
                 <button class="demo-tab" data-target="valo-predictions">Predictions</button>
+                <button class="demo-tab" data-target="valo-map-stats">Map Pools</button>
+                <button class="demo-tab" data-target="valo-history">History</button>
+                <button class="demo-tab" data-target="valo-simulations">Simulations</button>
+                <button class="demo-tab" data-target="valo-player-ratings">Player Ratings</button>
+                <button class="demo-tab" data-target="valo-record-book">Record Book</button>
+                <button class="demo-tab" data-target="valo-pick-ban">Pick/Ban</button>
               </div>
               <div class="demo-container">
                 <div class="demo-iframe-wrapper" id="valo-rankings">
                   <span class="demo-loading">Loading rankings...</span>
-                  <iframe
-                    data-src="https://valomapped.com/rankings"
-                    title="ValoMapped Rankings"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin"
-                  ></iframe>
+                  <iframe data-src="https://valomapped.com/rankings" title="ValoMapped Rankings" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
                 <div class="demo-iframe-wrapper" id="valo-predictions" style="display: none">
                   <span class="demo-loading">Loading predictions...</span>
-                  <iframe
-                    data-src="https://valomapped.com/predictions"
-                    title="ValoMapped Predictions"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin"
-                  ></iframe>
+                  <iframe data-src="https://valomapped.com/predictions" title="ValoMapped Predictions" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="valo-map-stats" style="display: none">
+                  <span class="demo-loading">Loading map pools...</span>
+                  <iframe data-src="https://valomapped.com/map-stats" title="ValoMapped Map Pools" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="valo-history" style="display: none">
+                  <span class="demo-loading">Loading history...</span>
+                  <iframe data-src="https://valomapped.com/history" title="ValoMapped Elo History" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="valo-simulations" style="display: none">
+                  <span class="demo-loading">Loading simulations...</span>
+                  <iframe data-src="https://valomapped.com/simulations" title="ValoMapped Simulations" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="valo-player-ratings" style="display: none">
+                  <span class="demo-loading">Loading player ratings...</span>
+                  <iframe data-src="https://valomapped.com/player-ratings" title="ValoMapped Player Ratings" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="valo-record-book" style="display: none">
+                  <span class="demo-loading">Loading record book...</span>
+                  <iframe data-src="https://valomapped.com/record-book" title="ValoMapped Record Book" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="valo-pick-ban" style="display: none">
+                  <span class="demo-loading">Loading pick/ban...</span>
+                  <iframe data-src="https://valomapped.com/pick-ban" title="ValoMapped Pick/Ban" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
               </div>
@@ -309,6 +335,79 @@
 <span class="keyword">const</span> team1Pick = Object.<span class="function">values</span>(team1Probabilities)
   .<span class="function">filter</span>(p <span class="operator">=&gt;</span> remainingMaps.<span class="function">has</span>(p.map))
   .<span class="function">sort</span>((a, b) <span class="operator">=&gt;</span> b.probability <span class="operator">-</span> a.probability)[<span class="number">0</span>]?.map;</code></pre>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="valo-map-stats">
+              <div class="math-block">
+                <div class="math-block__title">Drag-and-Drop Map Pool Comparison</div>
+                <div class="math-block__description">
+                  Compare up to 4 teams&rsquo; map performance pools side by side using <strong>dnd-kit
+                  drag-and-drop</strong>. Each chart visualizes a team&rsquo;s Elo ratings across all
+                  competitive maps, revealing strengths, weaknesses, and map pool depth at a glance.
+                  Useful for identifying which teams have the broadest or most specialized map pools.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="valo-history">
+              <div class="math-block">
+                <div class="math-block__title">Elo Trajectory Visualization</div>
+                <div class="math-block__description">
+                  Track how team ratings evolve over time with interactive Recharts line charts. The data
+                  pipeline transforms flat rating history into <strong>chronological team series with
+                  interpolated step points</strong> for accurate rendering. Supports filtering by
+                  individual maps and seasons to isolate performance trends on specific battlegrounds.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="valo-simulations">
+              <div class="math-block">
+                <div class="math-block__title">Monte Carlo Tournament Simulation</div>
+                <div class="math-block__description">
+                  Simulates entire VCT tournaments using Elo-based match probabilities. Supports
+                  <strong>multiple tournament formats</strong> &mdash; Swiss, GSL groups, and double
+                  elimination brackets. Each simulation runs thousands of iterations, producing
+                  probabilistic advancement and championship odds for every team. Historical
+                  tournaments can be re-simulated using the Elo snapshot from that point in time.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="valo-player-ratings">
+              <div class="math-block">
+                <div class="math-block__title">Valorant Plus/Minus (VPM) Player Model</div>
+                <div class="math-block__description">
+                  Individual player ratings using a <strong>VPM (Valorant Plus/Minus)</strong> model
+                  that isolates each player&rsquo;s contribution to team performance. Combines
+                  server-side rendered statistics with interactive graph visualizations to track
+                  player rating trajectories across tournaments and seasons.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="valo-record-book">
+              <div class="math-block">
+                <div class="math-block__title">Statistical Record Aggregation</div>
+                <div class="math-block__description">
+                  Aggregates competitive records across the entire database: <strong>peak team ratings
+                  per map, longest win/loss streaks, perfect games, peak player performances</strong>,
+                  and map popularity trends. Uses 8+ parallel API requests and a carousel display
+                  system to present records in a browsable format spanning multiple VCT seasons.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="valo-pick-ban">
+              <div class="math-block">
+                <div class="math-block__title">Pick/Ban Efficiency Analysis</div>
+                <div class="math-block__description">
+                  Analyzes each team&rsquo;s veto phase decisions by comparing <strong>actual picks and
+                  bans to the Elo-optimal selection</strong>. A dual-chart system visualizes cumulative
+                  Elo advantage and win probability deltas at each veto step, revealing whether teams
+                  are making strategically sound decisions or leaving rating points on the table.
+                </div>
               </div>
             </div>
           </div>
@@ -367,22 +466,23 @@
             <div class="demo-section">
               <div class="demo-tabs">
                 <button class="demo-tab active" data-target="wc-draw">Draw Simulator</button>
+                <button class="demo-tab" data-target="wc-stats">Monte Carlo Stats</button>
               </div>
               <div class="demo-container">
                 <div class="demo-iframe-wrapper" id="wc-draw">
                   <span class="demo-loading">Loading simulator...</span>
-                  <iframe
-                    data-src="https://bendotwillcox.github.io/world-cup-draw/"
-                    title="World Cup Draw Simulator"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin"
-                  ></iframe>
+                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Draw Simulator" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="wc-stats" style="display: none">
+                  <span class="demo-loading">Loading Monte Carlo stats...</span>
+                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Monte Carlo Stats" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
               </div>
             </div>
 
-            <!-- Tab-specific explainer -->
+            <!-- Tab-specific explainers -->
             <div class="tab-explainer" data-for-tab="wc-draw">
               <div class="math-block">
                 <div class="math-block__title">Constraint Satisfaction via Recursive Backtracking</div>
@@ -391,8 +491,7 @@
                   max 1 from any other confederation, and <strong>side-pairing constraints</strong>
                   (Spain/Argentina and France/England must land on opposite bracket sides). When you
                   drag a team, the engine runs a chained backtracking validation across Pots 2&rarr;3&rarr;4
-                  to verify the remaining teams can still complete a valid draw. Monte Carlo statistics
-                  are pre-computed from <strong>1 million simulated draws</strong>.
+                  to verify the remaining teams can still complete a valid draw.
                 </div>
               </div>
               <div class="code-snippet">
@@ -414,6 +513,21 @@
   }
   <span class="keyword">return</span> (groupMask <span class="operator">&amp;</span> teamConf) <span class="operator">===</span> <span class="number">0</span>;
 }</code></pre>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="wc-stats">
+              <div class="math-block">
+                <div class="math-block__title">Monte Carlo Statistics &mdash; 1 Million Simulated Draws</div>
+                <div class="math-block__description">
+                  Click the <strong>&ldquo;Monte Carlo Stats&rdquo;</strong> tab inside the app above to explore
+                  pre-computed statistics from 1 million simulated draws. Three views are available:
+                  <strong>Group Probabilities</strong> (color-coded matrix of each team&rsquo;s chance of
+                  landing in each group), <strong>Opponent Analysis</strong> (most likely opponents sorted
+                  by probability), and <strong>Stadium Forecast</strong> (venue likelihood based on group
+                  placement). The simulation uses <code>Int32Array</code> typed arrays and bitmask encoding
+                  to run all 1M iterations in ~200ms.
+                </div>
               </div>
             </div>
           </div>
@@ -475,26 +589,22 @@
               <div class="demo-tabs">
                 <button class="demo-tab active" data-target="mm-teams">Teams</button>
                 <button class="demo-tab" data-target="mm-compare">Compare</button>
+                <button class="demo-tab" data-target="mm-bracket">Bracket</button>
               </div>
               <div class="demo-container">
                 <div class="demo-iframe-wrapper" id="mm-teams">
                   <span class="demo-loading">Loading teams...</span>
-                  <iframe
-                    data-src="https://march-madness-app-lac.vercel.app/teams"
-                    title="March Madness Teams"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin"
-                  ></iframe>
+                  <iframe data-src="https://march-madness-app-lac.vercel.app/teams" title="March Madness Teams" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
                 <div class="demo-iframe-wrapper" id="mm-compare" style="display: none">
                   <span class="demo-loading">Loading comparison...</span>
-                  <iframe
-                    data-src="https://march-madness-app-lac.vercel.app/compare"
-                    title="March Madness Compare"
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin"
-                  ></iframe>
+                  <iframe data-src="https://march-madness-app-lac.vercel.app/compare" title="March Madness Compare" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="mm-bracket" style="display: none">
+                  <span class="demo-loading">Loading bracket...</span>
+                  <iframe data-src="https://march-madness-app-lac.vercel.app/bracket" title="March Madness Bracket" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
               </div>
@@ -528,6 +638,22 @@
                   how each team&rsquo;s strengths match up against the other&rsquo;s weaknesses. All 16+ metrics
                   are normalized to the same 0&ndash;100 scale so the radar shape is meaningful, not distorted
                   by differing units.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="mm-bracket">
+              <div class="math-block">
+                <div class="math-block__title">Interactive Bracket with Cascading State Engine</div>
+                <div class="math-block__description">
+                  Click any matchup to select a winner and advance them through the 68-game tournament
+                  bracket. The <strong>winner selection engine</strong> uses a dependency graph where each
+                  game references its <code>nextGameId</code> and <code>nextSlot</code>. When you change
+                  a winner, the engine automatically propagates via <code>syncWinnerToNext()</code>, then
+                  runs <code>clearInvalidWinnersDownstream()</code> to recursively cascade validity
+                  checks &mdash; ensuring that changing a second-round pick correctly invalidates any
+                  dependent Sweet 16, Elite 8, or Final Four selections. A comparison overlay modal
+                  pops up for data-driven decision support.
                 </div>
               </div>
             </div>

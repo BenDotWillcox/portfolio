@@ -155,12 +155,25 @@
   gap: 0;
   margin-bottom: 0;
   border-bottom: 2px solid $light-grey;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $light-grey;
+    border-radius: 3px;
+  }
 }
 
 .demo-tab {
   padding: 1rem 2rem;
   font-size: 1.4rem;
   font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
