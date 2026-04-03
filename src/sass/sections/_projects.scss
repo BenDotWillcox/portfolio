@@ -18,6 +18,7 @@
   padding-bottom: 6rem;
   border-bottom: 1px solid $light-grey;
   text-align: center;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 
   @include respond(phone) {
     margin-bottom: 4rem;
@@ -26,6 +27,19 @@
 
   &:last-child {
     border-bottom: none;
+  }
+
+  &--matched {
+    opacity: 1;
+  }
+
+  &--dimmed {
+    opacity: 0.35;
+    transform: scale(0.98);
+
+    &:hover {
+      opacity: 0.6;
+    }
   }
 }
 
@@ -114,6 +128,28 @@
   background: $tag-bg;
   color: $dark-blue-text;
   border: 1px solid $tag-border;
+  transition: all 0.2s ease;
+
+  &--highlighted {
+    background: $primary-color;
+    color: $white-color;
+    border-color: $primary-color;
+  }
+}
+
+// Skill match badge on filtered projects
+.skill-match-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
+  border: 1px solid rgba($primary-color, 0.3);
 }
 
 // Project description

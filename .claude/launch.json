@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/parcel/lib/bin.js"],
+      "port": 1234
+    }
+  ]
+}

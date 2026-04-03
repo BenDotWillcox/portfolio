@@ -83,11 +83,104 @@
     color: $dark-blue-text;
     border: 1px solid $tag-border;
     transition: all 0.2s ease;
+    cursor: pointer;
+    user-select: none;
 
     &:hover {
       background: $primary-color;
       color: $white-color;
       border-color: $primary-color;
+    }
+
+    &--active {
+      background: $primary-color;
+      color: $white-color;
+      border-color: $primary-color;
+      box-shadow: 0 2px 8px rgba($primary-color, 0.4);
+    }
+  }
+
+  .skill-clear-btn {
+    display: none;
+    margin-top: 1.6rem;
+    padding: 0.6rem 1.6rem;
+    border: 1px solid $light-grey;
+    border-radius: 2rem;
+    background: $white-color;
+    color: $dark-blue-text;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+
+    &--visible {
+      display: inline-block;
+    }
+  }
+}
+
+// Sticky filter banner — fixed top center
+.skill-filter-banner {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.6rem;
+  background: $white-color;
+  border: 1px solid $tag-border;
+  border-top: none;
+  border-radius: 0 0 0.8rem 0.8rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+
+  &--visible {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: darken($light-grey, 30%);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  &__skill {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $primary-color;
+    white-space: nowrap;
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border: none;
+    border-radius: 50%;
+    background: rgba($dark-blue-text, 0.08);
+    color: $dark-blue-text;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    &:hover {
+      background: rgba($primary-color, 0.15);
+      color: $primary-color;
     }
   }
 }
