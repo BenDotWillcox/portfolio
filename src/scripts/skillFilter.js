@@ -43,17 +43,25 @@ export default function initSkillFilter() {
   });
 
   pills.forEach((pill) => {
-    pill.style.cursor = "pointer";
-    pill.setAttribute("role", "button");
-    pill.setAttribute("tabindex", "0");
+    const skill = pill.textContent.trim();
+    const mapping = skillProjectMap[skill];
+    const hasProjects = mapping && mapping.length > 0;
 
-    pill.addEventListener("click", () => handleSkillClick(pill));
-    pill.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        handleSkillClick(pill);
-      }
-    });
+    if (hasProjects) {
+      pill.style.cursor = "pointer";
+      pill.setAttribute("role", "button");
+      pill.setAttribute("tabindex", "0");
+
+      pill.addEventListener("click", () => handleSkillClick(pill));
+      pill.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleSkillClick(pill);
+        }
+      });
+    } else {
+      pill.classList.add("skill-pill--no-projects");
+    }
   });
 
   function handleSkillClick(pill) {
@@ -138,6 +146,15 @@ export default function initSkillFilter() {
       }
     });
 
+    // Force-reveal any cards that ScrollReveal hasn't revealed yet
+    // (they may now be in the viewport after reordering)
+    cards.forEach((card) => {
+      card.classList.remove("load-hidden");
+      card.style.visibility = "visible";
+      card.style.opacity = "1";
+      card.style.transform = "none";
+    });
+
     // Smooth scroll to projects section
     const projectsSection = document.querySelector("#projects");
     if (projectsSection) {
@@ -173,6 +190,7 @@ export default function initSkillFilter() {
       "wc-draw-sim",
       "march-madness",
       "cooper-viz",
+      "pga-golf",
       "hoopstats",
       "nebula-civitas",
     ];

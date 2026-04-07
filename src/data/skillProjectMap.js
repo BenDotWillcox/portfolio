@@ -17,38 +17,46 @@ const skillProjectMap = {
     { project: "hoopstats", relevance: 3 },
   ],
   Pandas: [
+    { project: "pga-golf", relevance: 5, bestTab: "pga-explorer" },
     { project: "hoopstats", relevance: 4 },
-    { project: "valomapped", relevance: 3 },
+    { project: "nebula-civitas", relevance: 3 },
   ],
   NumPy: [
     { project: "hoopstats", relevance: 4 },
+    { project: "pga-golf", relevance: 3, bestTab: "pga-clusters" },
     { project: "wc-draw-sim", relevance: 3, bestTab: "wc-stats" },
   ],
   "Weights & Biases": [
     { project: "hoopstats", relevance: 3 },
   ],
+  "scikit-learn": [
+    { project: "pga-golf", relevance: 5, bestTab: "pga-clusters" },
+  ],
   "Statistical Modeling": [
     { project: "valomapped", relevance: 5, bestTab: "valo-rankings" },
+    { project: "pga-golf", relevance: 4, bestTab: "pga-fit" },
     { project: "wc-draw-sim", relevance: 4, bestTab: "wc-stats" },
     { project: "march-madness", relevance: 3, bestTab: "mm-teams" },
     { project: "cooper-viz", relevance: 3, bestTab: "cooper-teams" },
   ],
   "Elo Systems": [
     { project: "valomapped", relevance: 5, bestTab: "valo-rankings" },
-    { project: "cooper-viz", relevance: 5, bestTab: "cooper-teams" },
+    { project: "cooper-viz", relevance: 4, bestTab: "cooper-teams" },
     { project: "march-madness", relevance: 3, bestTab: "mm-teams" },
   ],
   "Monte Carlo Simulation": [
-    { project: "wc-draw-sim", relevance: 5, bestTab: "wc-stats" },
     { project: "valomapped", relevance: 5, bestTab: "valo-simulations" },
+    { project: "wc-draw-sim", relevance: 4, bestTab: "wc-stats" },
   ],
   "A/B Testing": [
-    { project: "nebula-civitas", relevance: 3 },
+    { project: "valomapped", relevance: 5 },
+    { project: "nebula-civitas", relevance: 4 },
   ],
 
   // ── Languages ────────────────────────────────────────────────
   Python: [
     { project: "hoopstats", relevance: 5 },
+    { project: "pga-golf", relevance: 5, bestTab: "pga-clusters" },
     { project: "nebula-civitas", relevance: 4 },
   ],
   R: [
@@ -76,14 +84,14 @@ const skillProjectMap = {
   // ── Web & Visualization ──────────────────────────────────────
   "Next.js": [
     { project: "valomapped", relevance: 5, bestTab: "valo-rankings" },
-    { project: "wc-draw-sim", relevance: 5, bestTab: "wc-draw" },
+    { project: "wc-draw-sim", relevance: 4, bestTab: "wc-draw" },
     { project: "march-madness", relevance: 4, bestTab: "mm-teams" },
     { project: "cooper-viz", relevance: 4, bestTab: "cooper-teams" },
     { project: "nebula-civitas", relevance: 3 },
   ],
   React: [
     { project: "valomapped", relevance: 5, bestTab: "valo-rankings" },
-    { project: "wc-draw-sim", relevance: 5, bestTab: "wc-draw" },
+    { project: "wc-draw-sim", relevance: 4, bestTab: "wc-draw" },
     { project: "march-madness", relevance: 4, bestTab: "mm-bracket" },
     { project: "cooper-viz", relevance: 4, bestTab: "cooper-teams" },
     { project: "nebula-civitas", relevance: 3 },
@@ -96,10 +104,16 @@ const skillProjectMap = {
   Recharts: [
     { project: "valomapped", relevance: 5, bestTab: "valo-history" },
     { project: "cooper-viz", relevance: 5, bestTab: "cooper-teams" },
-    { project: "wc-draw-sim", relevance: 4, bestTab: "wc-stats" },
-    { project: "march-madness", relevance: 3, bestTab: "mm-compare" },
+    { project: "march-madness", relevance: 4, bestTab: "mm-compare" },
+    { project: "wc-draw-sim", relevance: 3, bestTab: "wc-stats" },
+    
   ],
-  Streamlit: [],
+  Plotly: [
+    { project: "pga-golf", relevance: 5, bestTab: "pga-clusters" },
+  ],
+  Streamlit: [
+    { project: "pga-golf", relevance: 5, bestTab: "pga-clusters" },
+  ],
   "R Shiny": [],
   Matplotlib: [
     { project: "hoopstats", relevance: 3 },
@@ -132,11 +146,18 @@ const skillProjectMap = {
   ],
   PowerBI: [],
   Tableau: [],
+  SciPy: [
+    { project: "pga-golf", relevance: 5, bestTab: "pga-clusters" },
+  ],
+  "Data Golf API": [
+    { project: "pga-golf", relevance: 5, bestTab: "pga-explorer" },
+  ],
   Git: [
     { project: "valomapped", relevance: 3 },
     { project: "wc-draw-sim", relevance: 3 },
     { project: "march-madness", relevance: 3 },
     { project: "cooper-viz", relevance: 3 },
+    { project: "pga-golf", relevance: 3 },
     { project: "hoopstats", relevance: 3 },
     { project: "nebula-civitas", relevance: 3 },
   ],
