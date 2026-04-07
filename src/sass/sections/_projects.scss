@@ -275,6 +275,37 @@
   }
 }
 
+// External app notice (for apps that block iframe embedding)
+.demo-external-notice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  min-height: 20rem;
+  background: linear-gradient(135deg, rgba($primary-color, 0.03) 0%, rgba($primary-color, 0.08) 100%);
+  border: 1px dashed $tag-border;
+  border-radius: 0.8rem;
+  text-align: center;
+
+  &__text {
+    font-size: 1.4rem;
+    color: darken($light-grey, 25%);
+    margin-bottom: 1.6rem;
+  }
+
+  .cta-btn {
+    margin-bottom: 1.6rem;
+  }
+
+  &__hint {
+    font-size: 1.3rem;
+    color: darken($light-grey, 15%);
+    max-width: 40rem;
+    line-height: 1.5;
+  }
+}
+
 // Code snippets
 .code-snippet {
   margin: 2.4rem 0;
