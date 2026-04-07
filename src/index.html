@@ -127,6 +127,7 @@
                 <span class="skill-pill">Pandas</span>
                 <span class="skill-pill">NumPy</span>
                 <span class="skill-pill">Weights & Biases</span>
+                <span class="skill-pill">scikit-learn</span>
                 <span class="skill-pill">Statistical Modeling</span>
                 <span class="skill-pill">Elo Systems</span>
                 <span class="skill-pill">Monte Carlo Simulation</span>
@@ -150,6 +151,7 @@
                 <span class="skill-pill">React</span>
                 <span class="skill-pill">Tailwind CSS</span>
                 <span class="skill-pill">Recharts</span>
+                <span class="skill-pill">Plotly</span>
                 <span class="skill-pill">Streamlit</span>
                 <span class="skill-pill">R Shiny</span>
                 <span class="skill-pill">Matplotlib</span>
@@ -795,7 +797,202 @@
           </div>
           <!-- /END Cooper Visualization -->
 
-          <!-- ============ PROJECT 5: HoopStats ============ -->
+          <!-- ============ PROJECT 5: PGA Golf Course Analysis ============ -->
+          <div class="project-card load-hidden">
+            <div class="project-header">
+              <h3 class="project-title">PGA Golf Course Analysis &mdash; Clustering &amp; Player Fit</h3>
+              <span class="status-badge status-badge--live">Live</span>
+            </div>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Streamlit</span>
+              <span class="tech-tag">scikit-learn</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">Plotly</span>
+              <span class="tech-tag">SciPy</span>
+              <span class="tech-tag">Data Golf API</span>
+            </div>
+            <div class="project-description">
+              <p>
+                An interactive data science app that clusters <strong>88 PGA Tour courses</strong> across a
+                64-dimensional feature space (strokes-gained demands, grass types, yardage, fairway profiles)
+                using K-Means with silhouette-optimized cluster selection.
+              </p>
+              <p>
+                Matches <strong>~435 active PGA players</strong> to course cluster types via a dot-product
+                fit score that aligns player skill vectors with cluster demand profiles &mdash; predicting
+                which players gain or lose strokes at each course archetype. Includes KNN course similarity
+                search, hierarchical cluster dendrograms, and PCA variance analysis.
+              </p>
+            </div>
+            <div class="project-links">
+              <a rel="noreferrer" target="_blank" class="cta-btn cta-btn--hero"
+                href="https://pgagolfcourseanalysis-f7w4juxnnjk6x46ehdjawu.streamlit.app/">
+                See Live
+              </a>
+              <a rel="noreferrer" target="_blank" class="cta-btn text-color-main"
+                href="https://github.com/BenDotWillcox/PGAGolfCourseAnalysis">
+                Source Code
+              </a>
+            </div>
+
+            <div class="demo-section">
+              <div class="demo-tabs">
+                <button class="demo-tab active" data-target="pga-clusters">Course Clusters</button>
+                <button class="demo-tab" data-target="pga-similar">Similar Courses</button>
+                <button class="demo-tab" data-target="pga-fit">Player-Course Fit</button>
+                <button class="demo-tab" data-target="pga-explorer">Data Explorer</button>
+              </div>
+              <div class="demo-container">
+                <div class="demo-iframe-wrapper" id="pga-clusters">
+                  <span class="demo-loading">Loading course clusters...</span>
+                  <iframe
+                    data-src="https://pgagolfcourseanalysis-f7w4juxnnjk6x46ehdjawu.streamlit.app/"
+                    title="PGA Golf Course Clusters"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  ></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="pga-similar" style="display:none">
+                  <span class="demo-loading">Loading similar courses...</span>
+                  <iframe
+                    data-src="https://pgagolfcourseanalysis-f7w4juxnnjk6x46ehdjawu.streamlit.app/"
+                    title="PGA Find Similar Courses"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  ></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="pga-fit" style="display:none">
+                  <span class="demo-loading">Loading player-course fit...</span>
+                  <iframe
+                    data-src="https://pgagolfcourseanalysis-f7w4juxnnjk6x46ehdjawu.streamlit.app/"
+                    title="PGA Player-Course Fit Analysis"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  ></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="pga-explorer" style="display:none">
+                  <span class="demo-loading">Loading data explorer...</span>
+                  <iframe
+                    data-src="https://pgagolfcourseanalysis-f7w4juxnnjk6x46ehdjawu.streamlit.app/"
+                    title="PGA Course Data Explorer"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  ></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab-specific explainers -->
+            <div class="tab-explainer" data-for-tab="pga-clusters">
+              <div class="math-block">
+                <div class="math-block__title">K-Means Clustering &mdash; Silhouette-Optimized</div>
+                <div class="math-block__formula">
+                  s(i) = (b(i) &minus; a(i)) / max(a(i), b(i))
+                </div>
+                <div class="math-block__description">
+                  Each course is represented as a <strong>64-dimensional vector</strong> (29 performance
+                  metrics + one-hot encoded grass/soil types), standardized via z-score scaling. K-Means
+                  runs k=2&hellip;15 with <strong>300 initializations per k</strong> to avoid local optima.
+                  The silhouette score s(i) measures how well each course fits its assigned cluster: a(i) is
+                  the mean intra-cluster distance, b(i) is the nearest-cluster distance. The k that maximizes
+                  the average silhouette score is selected automatically.
+                </div>
+              </div>
+              <div class="code-snippet">
+                <div class="code-snippet__header">
+                  <span class="code-snippet__lang">Python</span>
+                  <span class="code-snippet__file">src/clustering.py</span>
+                </div>
+                <pre><code><span class="comment"># Cluster labeling: dominant SG demand + yardage profile</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(k):
+    mask = labels <span class="operator">==</span> i
+    cluster_courses = course_data[mask]
+    sg_cols = [<span class="string">'ott_sg'</span>, <span class="string">'app_sg'</span>, <span class="string">'arg_sg'</span>, <span class="string">'putt_sg'</span>]
+    dominant = cluster_courses[sg_cols].<span class="function">mean</span>().<span class="function">idxmax</span>()
+    avg_yardage = cluster_courses[<span class="string">'adj_yardage'</span>].<span class="function">mean</span>()
+    length = <span class="string">"Long"</span> <span class="keyword">if</span> avg_yardage &gt; median_yardage <span class="keyword">else</span> <span class="string">"Short"</span></code></pre>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="pga-similar">
+              <div class="math-block">
+                <div class="math-block__title">KNN Course Similarity &mdash; 64-D Euclidean Distance</div>
+                <div class="math-block__formula">
+                  d(A, B) = &radic;(&sum;<sub>j=1</sub><sup>64</sup> (a<sub>j</sub> &minus; b<sub>j</sub>)<sup>2</sup>)
+                  &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                  similarity = 1 / (1 + d)
+                </div>
+                <div class="math-block__description">
+                  Given a selected course, the app computes <strong>Euclidean distance to all 87 other
+                  courses</strong> in the scaled 64-D feature space. The similarity score maps distance to
+                  a 0&ndash;1 range (1 = identical). A radar chart overlays the selected course against its
+                  top 5 matches across 7 normalized features &mdash; yardage, driving distance, driving
+                  accuracy, and 4 strokes-gained demands &mdash; making it easy to see where courses
+                  align or diverge.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="pga-fit">
+              <div class="math-block">
+                <div class="math-block__title">Player-Course Fit &mdash; Dot Product Scoring</div>
+                <div class="math-block__formula">
+                  Fit = &sum;<sub>i</sub> (SG<sub>player,i</sub> &times; SG<sub>cluster,i</sub>)
+                  &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+                  Predicted SG = Baseline SG + Fit Score
+                </div>
+                <div class="math-block__description">
+                  Each player&rsquo;s skill profile (OTT, Approach, Short Game, Putting) is treated as a
+                  <strong>4-dimensional vector</strong>. Each cluster&rsquo;s average SG demands form a
+                  second vector. The dot product measures alignment: positive when a player&rsquo;s
+                  strengths match the cluster&rsquo;s demands, negative when weaknesses are exposed.
+                  A strong putter gains strokes at putting-heavy clusters; a weak driver loses strokes
+                  at driving-heavy ones. Predicted SG = raw skill &plusmn; fit bonus.
+                </div>
+              </div>
+              <div class="code-snippet">
+                <div class="code-snippet__header">
+                  <span class="code-snippet__lang">Python</span>
+                  <span class="code-snippet__file">src/player_performance.py</span>
+                </div>
+                <pre><code><span class="comment"># Score every player against a cluster's SG demand profile</span>
+<span class="keyword">def</span> <span class="function">compute_fit_scores</span>(players_df, cluster_profile):
+    sg_components = [<span class="string">'sg_ott'</span>, <span class="string">'sg_app'</span>, <span class="string">'sg_arg'</span>, <span class="string">'sg_putt'</span>]
+    demand = [<span class="string">'ott_sg'</span>, <span class="string">'app_sg'</span>, <span class="string">'arg_sg'</span>, <span class="string">'putt_sg'</span>]
+    fit = <span class="function">sum</span>(
+        players_df[sc] <span class="operator">*</span> cluster_profile[d]
+        <span class="keyword">for</span> sc, d <span class="keyword">in</span> <span class="function">zip</span>(sg_components, demand)
+    )
+    <span class="keyword">return</span> players_df[<span class="string">'sg_total'</span>] + fit</code></pre>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="pga-explorer">
+              <div class="math-block">
+                <div class="math-block__title">PCA Variance Analysis &mdash; Dimensionality Diagnostic</div>
+                <div class="math-block__formula">
+                  Var explained = &lambda;<sub>k</sub> / &sum;<sub>j</sub> &lambda;<sub>j</sub>
+                </div>
+                <div class="math-block__description">
+                  The Data Explorer tab exposes the raw datasets: <strong>88 courses &times; 29 performance
+                  metrics</strong>, grass/soil characteristics, and ~435 player skill ratings. The PCA
+                  variance plot shows how information concentrates across principal components &mdash;
+                  despite 64 features, ~85% of variance is captured in roughly 20&ndash;25 components.
+                  Clustering deliberately uses the <strong>full 64-D space</strong> rather than a reduced
+                  representation, preserving the fine-grained signal from grass types and course layout
+                  features that PCA would compress.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /END PGA Golf Course Analysis -->
+
+          <!-- ============ PROJECT 6: HoopStats ============ -->
           <div class="project-card load-hidden" data-project="hoopstats">
             <div class="project-header">
               <h3 class="project-title">HoopStats &mdash; AI Basketball Box Score</h3>
