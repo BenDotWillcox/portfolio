@@ -18,8 +18,8 @@ export default function initDemoTabs() {
       const container = project.querySelector(".demo-container");
       if (!container) return;
 
-      // Hide all iframe wrappers and external notices, show the target
-      container.querySelectorAll(".demo-iframe-wrapper, .demo-external-notice").forEach((w) => {
+      // Hide all iframe wrappers, external notices, and previews; show the target
+      container.querySelectorAll(".demo-iframe-wrapper, .demo-external-notice, .demo-preview").forEach((w) => {
         w.style.display = "none";
       });
       const targetWrapper = container.querySelector(`#${targetId}`);

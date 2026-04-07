@@ -275,34 +275,59 @@
   }
 }
 
-// External app notice (for apps that block iframe embedding)
-.demo-external-notice {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  min-height: 20rem;
-  background: linear-gradient(135deg, rgba($primary-color, 0.03) 0%, rgba($primary-color, 0.08) 100%);
-  border: 1px dashed $tag-border;
+// Screenshot preview (for apps that block iframe embedding)
+.demo-preview {
   border-radius: 0.8rem;
-  text-align: center;
+  overflow: hidden;
 
-  &__text {
-    font-size: 1.4rem;
-    color: darken($light-grey, 25%);
-    margin-bottom: 1.6rem;
+  &__link {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
   }
 
-  .cta-btn {
-    margin-bottom: 1.6rem;
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: filter 0.3s ease;
   }
 
-  &__hint {
-    font-size: 1.3rem;
-    color: darken($light-grey, 15%);
-    max-width: 40rem;
-    line-height: 1.5;
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &__btn {
+    display: inline-block;
+    padding: 1.2rem 2.8rem;
+    border: 2px solid $white-color;
+    border-radius: 0.4rem;
+    color: $white-color;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: rgba($primary-color, 0.85);
+    transition: background 0.2s ease;
+  }
+
+  &__link:hover &__overlay {
+    opacity: 1;
+  }
+
+  &__link:hover &__img {
+    filter: brightness(0.85);
+  }
+
+  &__link:hover &__btn {
+    background: $primary-color;
   }
 }
 
