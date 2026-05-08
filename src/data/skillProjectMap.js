@@ -8,12 +8,14 @@
 const skillProjectMap = {
   // ── ML & Data Science ────────────────────────────────────────
   PyTorch: [
+    { project: "benbot", relevance: 5, bestTab: "benbot-play" },
     { project: "hoopstats", relevance: 5 },
   ],
   OpenCV: [
     { project: "hoopstats", relevance: 5 },
   ],
   Huggingface: [
+    { project: "benbot", relevance: 5, bestTab: "benbot-play" },
     { project: "hoopstats", relevance: 3 },
   ],
   Pandas: [
@@ -55,6 +57,7 @@ const skillProjectMap = {
 
   // ── Languages ────────────────────────────────────────────────
   Python: [
+    { project: "benbot", relevance: 5, bestTab: "benbot-play" },
     { project: "hoopstats", relevance: 5 },
     { project: "pga-golf", relevance: 5, bestTab: "pga-clusters" },
     { project: "nebula-civitas", relevance: 4 },
@@ -75,6 +78,7 @@ const skillProjectMap = {
     { project: "nebula-civitas", relevance: 3 },
   ],
   JavaScript: [
+    { project: "benbot", relevance: 4, bestTab: "benbot-play" },
     { project: "valomapped", relevance: 4 },
     { project: "wc-draw-sim", relevance: 4 },
     { project: "march-madness", relevance: 3 },
@@ -153,6 +157,7 @@ const skillProjectMap = {
     { project: "pga-golf", relevance: 5, bestTab: "pga-explorer" },
   ],
   Git: [
+    { project: "benbot", relevance: 3 },
     { project: "valomapped", relevance: 3 },
     { project: "wc-draw-sim", relevance: 3 },
     { project: "march-madness", relevance: 3 },

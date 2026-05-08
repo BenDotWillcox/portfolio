@@ -251,6 +251,11 @@
     height: 100%;
     border: none;
   }
+
+  &--tall {
+    padding-top: 68%;
+    max-height: 760px;
+  }
 }
 
 .demo-loading {

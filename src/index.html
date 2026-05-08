@@ -415,7 +415,78 @@
           </div>
           <!-- /END ValoMapped -->
 
-          <!-- ============ PROJECT 2: World Cup Draw ============ -->
+          <!-- ============ PROJECT 2: BenBot ============ -->
+          <div class="project-card load-hidden" data-project="benbot">
+            <div class="project-header">
+              <h3 class="project-title">BenBot &mdash; Personalized AI Chess Twin</h3>
+              <span class="status-badge status-badge--live">Live</span>
+            </div>
+
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">Huggingface</span>
+              <span class="tech-tag">Maia2</span>
+              <span class="tech-tag">Stockfish</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+
+            <div class="project-description">
+              <p>
+                A playable chess bot trained to mirror my rapid-game decision patterns using a
+                personalized policy layered on top of <strong>Maia2</strong>. The system combines
+                Chess.com game ingestion, personal opening books, FEN/prefix-aware move prediction,
+                and a browser-based board served by a FastAPI backend.
+              </p>
+              <p>
+                The live app exposes the bot's candidate moves, policy settings, and style source
+                for each decision. An optional <strong>Stockfish safety layer</strong> can veto major
+                blunders so the bot keeps my tendencies while avoiding obviously losing moves.
+              </p>
+            </div>
+
+            <div class="project-links">
+              <a
+                rel="noreferrer"
+                target="_blank"
+                class="cta-btn cta-btn--hero"
+                href="https://huggingface.co/spaces/Bwillcox/BenBot"
+              >
+                See Live
+              </a>
+            </div>
+
+            <!-- Embedded Demo -->
+            <div class="demo-section">
+              <div class="demo-tabs">
+                <button class="demo-tab active" data-target="benbot-play">Play BenBot</button>
+              </div>
+              <div class="demo-container">
+                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="benbot-play">
+                  <span class="demo-loading">Loading BenBot...</span>
+                  <iframe data-src="https://bwillcox-benbot.hf.space" title="BenBot Chess Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab-specific explainer -->
+            <div class="tab-explainer" data-for-tab="benbot-play">
+              <div class="math-block">
+                <div class="math-block__title">Personalized Maia2 Policy</div>
+                <div class="math-block__description">
+                  The bot scores legal moves using a combined strategy: Maia2 supplies the human-like
+                  chess prior, while personal move-prefix and position books nudge choices toward my
+                  historical tendencies. The UI surfaces the selected move, candidate probabilities,
+                  book counts, and Stockfish veto status so each decision is inspectable.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /END BenBot -->
+
+          <!-- ============ PROJECT 3: World Cup Draw ============ -->
           <div class="project-card load-hidden" data-project="wc-draw-sim">
             <div class="project-header">
               <h3 class="project-title">World Cup 2026 Draw Simulator</h3>
