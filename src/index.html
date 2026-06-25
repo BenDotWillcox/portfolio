@@ -1105,6 +1105,20 @@
               </a>
             </div>
 
+            <!-- Embedded Pipeline Display -->
+            <div class="demo-section">
+              <div class="demo-tabs">
+                <button class="demo-tab active" data-target="hoopstats-pipeline">Pipeline</button>
+              </div>
+              <div class="demo-container">
+                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="hoopstats-pipeline">
+                  <span class="demo-loading">Loading pipeline...</span>
+                  <iframe data-src="assets/hoopstats/pipeline.html" title="HoopStats Pipeline Display" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+              </div>
+            </div>
+
             <!-- Progress -->
             <div class="project-progress">
               <h4 class="project-progress__title">Current Progress</h4>
@@ -1191,11 +1205,51 @@
               <a
                 rel="noreferrer"
                 target="_blank"
+                class="cta-btn cta-btn--hero"
+                href="https://voting-paradigm.vercel.app/"
+              >
+                See Live
+              </a>
+              <a
+                rel="noreferrer"
+                target="_blank"
                 class="cta-btn text-color-main"
                 href="https://github.com/BenDotWillcox/voting-paradigm"
               >
                 Source Code
               </a>
+            </div>
+
+            <!-- Embedded Demos -->
+            <div class="demo-section">
+              <div class="demo-tabs">
+                <button class="demo-tab active" data-target="voting-methods">Voting Methods</button>
+                <button class="demo-tab" data-target="voting-districts">Districting</button>
+                <button class="demo-tab" data-target="voting-preferences">Preference Agent</button>
+                <button class="demo-tab" data-target="voting-liquid">Liquid Democracy</button>
+              </div>
+              <div class="demo-container">
+                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="voting-methods">
+                  <span class="demo-loading">Loading voting methods...</span>
+                  <iframe data-src="https://voting-paradigm.vercel.app/methods" title="Voting Paradigm Methods Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="voting-districts" style="display: none">
+                  <span class="demo-loading">Loading districting...</span>
+                  <iframe data-src="https://voting-paradigm.vercel.app/districts" title="Voting Paradigm Districting Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="voting-preferences" style="display: none">
+                  <span class="demo-loading">Loading preference agent...</span>
+                  <iframe data-src="https://voting-paradigm.vercel.app/preferences" title="Voting Paradigm Preference Agent Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="voting-liquid" style="display: none">
+                  <span class="demo-loading">Loading liquid democracy...</span>
+                  <iframe data-src="https://voting-paradigm.vercel.app/liquid" title="Voting Paradigm Liquid Democracy Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+              </div>
             </div>
 
             <!-- Progress -->
@@ -1205,12 +1259,10 @@
                 <li class="done">Voting mechanisms package (6 methods, 144+ tests)</li>
                 <li class="done">FastAPI backend with CORS support</li>
                 <li class="done">Database schema & migrations (Drizzle ORM)</li>
-                <li class="done">Proposal creation form with validation</li>
-                <li class="done">Ballot creation UI</li>
-                <li class="todo">Proposal list/detail pages with filters</li>
-                <li class="todo">Election simulation runner (synthetic voter populations)</li>
-                <li class="todo">Topic-scoped delegation graph explorer</li>
-                <li class="todo">Voting method comparison visualizations</li>
+                <li class="done">Voting methods comparison demo</li>
+                <li class="done">Algorithmic apportionment and districting demo</li>
+                <li class="todo">Preference-agent walkthrough polish and public replay assets</li>
+                <li class="todo">Liquid democracy delegation graph simulator</li>
               </ul>
             </div>
 

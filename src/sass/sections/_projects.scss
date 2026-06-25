@@ -280,6 +280,77 @@
   }
 }
 
+.demo-external-notice {
+  padding: 2.4rem;
+  text-align: left;
+}
+
+.demo-panel {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 2.4rem;
+  border: 1px solid rgba($primary-color, 0.22);
+  border-left: 4px solid $primary-color;
+  border-radius: 0.8rem;
+  background: $white-color;
+
+  h4 {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+    color: $dark-blue-text;
+  }
+
+  p {
+    margin: 0 0 1rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: darken($light-grey, 30%);
+  }
+
+  code {
+    font-family: "Courier New", Consolas, monospace;
+    font-size: 1.2rem;
+    color: $dark-blue-text;
+  }
+
+  &--soon {
+    border-color: rgba($in-progress-color, 0.25);
+    border-left-color: $in-progress-color;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $primary-color;
+  }
+
+  &__note {
+    padding-top: 0.8rem;
+    border-top: 1px solid $light-grey;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+
+    span {
+      padding: 0.3rem 0.9rem;
+      border: 1px solid $tag-border;
+      border-radius: 0.4rem;
+      background: $tag-bg;
+      color: $dark-blue-text;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
+}
+
 // Screenshot preview (for apps that block iframe embedding)
 .demo-preview {
   border-radius: 0.8rem;

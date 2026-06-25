@@ -6,8 +6,9 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build",
-    "gh-pages-build": "parcel build --public-url ."
+    "build": "parcel build && npm run copy:hoopstats",
+    "gh-pages-build": "parcel build --public-url . && npm run copy:hoopstats",
+    "copy:hoopstats": "node scripts/copy-hoopstats-assets.js"
   },
   "repository": {
     "type": "git",
