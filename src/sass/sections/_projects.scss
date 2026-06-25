@@ -267,6 +267,48 @@
   color: darken($light-grey, 20%);
 }
 
+.demo-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  background: #f8f9fa;
+  color: $dark-blue-text;
+
+  h4 {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+  }
+
+  p {
+    max-width: 62rem;
+    margin: 0 0 1.6rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: darken($light-grey, 30%);
+  }
+
+  a {
+    color: $primary-color;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  &__eyebrow {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $primary-color;
+  }
+}
+
 .demo-fallback {
   display: none;
   padding: 3rem;

@@ -123,11 +123,15 @@
               <div class="skill-category__list">
                 <span class="skill-pill">PyTorch</span>
                 <span class="skill-pill">OpenCV</span>
+                <span class="skill-pill">Roboflow</span>
+                <span class="skill-pill">SAM2</span>
+                <span class="skill-pill">PaddleOCR</span>
                 <span class="skill-pill">Huggingface</span>
                 <span class="skill-pill">Pandas</span>
                 <span class="skill-pill">NumPy</span>
                 <span class="skill-pill">Weights & Biases</span>
                 <span class="skill-pill">scikit-learn</span>
+                <span class="skill-pill">SciPy</span>
                 <span class="skill-pill">Statistical Modeling</span>
                 <span class="skill-pill">Elo Systems</span>
                 <span class="skill-pill">Monte Carlo Simulation</span>
@@ -149,6 +153,7 @@
               <div class="skill-category__list">
                 <span class="skill-pill">Next.js</span>
                 <span class="skill-pill">React</span>
+                <span class="skill-pill">FastAPI</span>
                 <span class="skill-pill">Tailwind CSS</span>
                 <span class="skill-pill">Recharts</span>
                 <span class="skill-pill">Plotly</span>
@@ -168,6 +173,7 @@
                 <span class="skill-pill">Supabase</span>
                 <span class="skill-pill">AWS RDS</span>
                 <span class="skill-pill">Grafana</span>
+                <span class="skill-pill">Data Golf API</span>
                 <span class="skill-pill">PowerBI</span>
                 <span class="skill-pill">Tableau</span>
                 <span class="skill-pill">Git</span>
@@ -195,8 +201,11 @@
             <div class="tech-tags">
               <span class="tech-tag">Next.js</span>
               <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">React</span>
               <span class="tech-tag">PostgreSQL</span>
               <span class="tech-tag">Drizzle ORM</span>
+              <span class="tech-tag">Supabase</span>
+              <span class="tech-tag">AWS RDS</span>
               <span class="tech-tag">Recharts</span>
               <span class="tech-tag">Tailwind CSS</span>
             </div>
@@ -538,18 +547,24 @@
             <!-- Embedded Demo -->
             <div class="demo-section">
               <div class="demo-tabs">
-                <button class="demo-tab active" data-target="wc-draw">Draw Simulator</button>
+                <button class="demo-tab active" data-target="wc-draw">Visual Draw</button>
                 <button class="demo-tab" data-target="wc-stats">Monte Carlo Stats</button>
+                <button class="demo-tab" data-target="wc-path">Path Visualizer</button>
               </div>
               <div class="demo-container">
                 <div class="demo-iframe-wrapper" id="wc-draw">
                   <span class="demo-loading">Loading simulator...</span>
-                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Draw Simulator" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Visual Draw" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
                 <div class="demo-iframe-wrapper" id="wc-stats" style="display: none">
                   <span class="demo-loading">Loading Monte Carlo stats...</span>
                   <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Monte Carlo Stats" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-iframe-wrapper" id="wc-path" style="display: none">
+                  <span class="demo-loading">Loading path visualizer...</span>
+                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Path Visualizer" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
               </div>
@@ -593,13 +608,25 @@
               <div class="math-block">
                 <div class="math-block__title">Monte Carlo Statistics &mdash; 1 Million Simulated Draws</div>
                 <div class="math-block__description">
-                  Click the <strong>&ldquo;Monte Carlo Stats&rdquo;</strong> tab inside the app above to explore
-                  pre-computed statistics from 1 million simulated draws. Three views are available:
+                  The Monte Carlo tab exposes pre-computed statistics from 1 million simulated draws.
+                  Three views are available:
                   <strong>Group Probabilities</strong> (color-coded matrix of each team&rsquo;s chance of
                   landing in each group), <strong>Opponent Analysis</strong> (most likely opponents sorted
                   by probability), and <strong>Stadium Forecast</strong> (venue likelihood based on group
                   placement). The simulation uses <code>Int32Array</code> typed arrays and bitmask encoding
                   to run all 1M iterations in ~200ms.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="wc-path">
+              <div class="math-block">
+                <div class="math-block__title">Path Visualizer &mdash; Travel and Knockout Routes</div>
+                <div class="math-block__description">
+                  The Path Visualizer connects draw outcomes to the tournament bracket and host-city map.
+                  For a selected team, it shows group-stage travel, possible knockout routes for first,
+                  second, or third-place finishes, conditional opponents by round, rest/travel summaries,
+                  and the stadium sequence implied by the bracket path.
                 </div>
               </div>
             </div>
@@ -616,6 +643,7 @@
             <div class="tech-tags">
               <span class="tech-tag">Next.js</span>
               <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">React</span>
               <span class="tech-tag">Supabase</span>
               <span class="tech-tag">Recharts</span>
               <span class="tech-tag">React Leaflet</span>
@@ -743,6 +771,7 @@
             <div class="tech-tags">
               <span class="tech-tag">Next.js</span>
               <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">React</span>
               <span class="tech-tag">Recharts</span>
               <span class="tech-tag">Tailwind CSS</span>
             </div>
@@ -1077,20 +1106,26 @@
               <span class="tech-tag">Roboflow</span>
               <span class="tech-tag">SAM2</span>
               <span class="tech-tag">PaddleOCR</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">Matplotlib</span>
+              <span class="tech-tag">Seaborn</span>
+              <span class="tech-tag">SciPy</span>
             </div>
 
             <div class="project-description">
               <p>
                 A <strong>computer vision pipeline</strong> that processes basketball game video to
-                automatically generate shot-by-shot statistics and player box scores. Uses
-                Roboflow's RF-DETR model for multi-class detection (players, ball, rim, jersey numbers,
-                shot types), with ByteTrack and Meta's SAM2 for player tracking across frames.
+                detect players, track possessions, project movement onto a regulation court, and
+                prepare the data needed for automated shot charts and box scores. The current portfolio
+                artifact is a generated static pipeline report with embedded tracking videos and status.
               </p>
               <p>
-                Includes <strong>homography transformation</strong> to map pixel coordinates to NBA
-                court positions (in feet), enabling accurate shot location classification (2PT/3PT).
-                Play recognition uses <strong>Dynamic Time Warping (DTW)</strong> with hierarchical
-                clustering to identify similar offensive possessions from trajectory data.
+                Uses Roboflow RF-DETR for multi-class detection, ByteTrack plus SAM2-style mask
+                tracking for identity continuity, color clustering for team labels, and
+                <strong>homography transformation</strong> to convert broadcast pixels into court
+                coordinates in feet. Shot-event detection, OCR, and game-clock parsing remain the
+                next production steps.
               </p>
             </div>
 
@@ -1108,13 +1143,117 @@
             <!-- Embedded Pipeline Display -->
             <div class="demo-section">
               <div class="demo-tabs">
-                <button class="demo-tab active" data-target="hoopstats-pipeline">Pipeline</button>
+                <button class="demo-tab active" data-target="hoopstats-pipeline">Pipeline Report</button>
+                <button class="demo-tab" data-target="hoopstats-tracking">Tracking</button>
+                <button class="demo-tab" data-target="hoopstats-court-map">Court Mapping</button>
+                <button class="demo-tab" data-target="hoopstats-roadmap">Box Score Roadmap</button>
               </div>
               <div class="demo-container">
                 <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="hoopstats-pipeline">
                   <span class="demo-loading">Loading pipeline...</span>
                   <iframe data-src="assets/hoopstats/pipeline.html" title="HoopStats Pipeline Display" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
+                </div>
+                <div class="demo-external-notice" id="hoopstats-tracking" style="display: none">
+                  <div class="demo-panel">
+                    <span class="demo-panel__eyebrow">Current capability</span>
+                    <h4>Broadcast tracking with persistent IDs</h4>
+                    <p>
+                      The generated pipeline report includes a tracking-debug clip showing per-frame
+                      detections, persistent player IDs, and team colors over the broadcast feed.
+                    </p>
+                    <div class="demo-panel__tags">
+                      <span>RF-DETR</span>
+                      <span>ByteTrack</span>
+                      <span>SAM2 masks</span>
+                      <span>Team color clustering</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="demo-external-notice" id="hoopstats-court-map" style="display: none">
+                  <div class="demo-panel">
+                    <span class="demo-panel__eyebrow">Current capability</span>
+                    <h4>Pixel-to-court projection</h4>
+                    <p>
+                      Player tracks are transformed from broadcast pixels into real court coordinates
+                      using a calibrated homography, enabling top-down possession views and eventual
+                      2PT/3PT shot-location classification.
+                    </p>
+                    <div class="demo-panel__tags">
+                      <span>OpenCV</span>
+                      <span>Homography</span>
+                      <span>Coordinate geometry</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="demo-external-notice" id="hoopstats-roadmap" style="display: none">
+                  <div class="demo-panel demo-panel--soon">
+                    <span class="demo-panel__eyebrow">Next build step</span>
+                    <h4>From tracked possessions to box scores</h4>
+                    <p>
+                      The remaining work is turning reliable tracks into basketball events: detect the
+                      shot window, associate the shooter, use OCR/game-clock evidence for player and
+                      time context, then export shot charts and box-score tables.
+                    </p>
+                    <div class="demo-panel__tags">
+                      <span>Shot event detection</span>
+                      <span>Jersey OCR</span>
+                      <span>Clock parsing</span>
+                      <span>CSV export</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab-specific explainers -->
+            <div class="tab-explainer" data-for-tab="hoopstats-pipeline">
+              <div class="math-block">
+                <div class="math-block__title">Generated Portfolio Artifact</div>
+                <div class="math-block__description">
+                  The embedded report is produced from the HoopStats pipeline output, so the portfolio
+                  can be refreshed as the CV stack improves. It packages tracking videos, detection
+                  snapshots, metrics, and current status into a static HTML asset that can be deployed
+                  without running the full ML environment.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="hoopstats-tracking">
+              <div class="math-block">
+                <div class="math-block__title">Multi-Object Tracking Across Broadcast Frames</div>
+                <div class="math-block__description">
+                  The hardest current capability is maintaining identity through a moving broadcast
+                  camera. RF-DETR provides player and ball detections, ByteTrack links detections into
+                  trajectories, and segmentation masks help stabilize identity when players overlap.
+                  Team labels are inferred from uniform color clusters rather than manually assigned.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="hoopstats-court-map">
+              <div class="math-block">
+                <div class="math-block__title">Court Homography</div>
+                <div class="math-block__formula">
+                  [x<sub>court</sub>, y<sub>court</sub>, 1] &sim; H &times; [x<sub>pixel</sub>, y<sub>pixel</sub>, 1]
+                </div>
+                <div class="math-block__description">
+                  A homography matrix maps image coordinates onto a standardized court plane. That
+                  conversion turns noisy broadcast detections into basketball features: spacing,
+                  possession shape, shot distance, and whether a shot originates inside or outside
+                  the three-point arc.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="hoopstats-roadmap">
+              <div class="math-block">
+                <div class="math-block__title">Event Layer Still In Progress</div>
+                <div class="math-block__description">
+                  The tracking layer is useful by itself, but the box-score product depends on an
+                  event layer that can identify a jump-shot motion, locate the ball/rim interaction,
+                  resolve the shooter, and attach time/player metadata. The portfolio now states that
+                  boundary clearly instead of implying the full scorer is production-ready.
                 </div>
               </div>
             </div>
@@ -1182,22 +1321,27 @@
               <span class="tech-tag">FastAPI</span>
               <span class="tech-tag">Next.js</span>
               <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">React</span>
               <span class="tech-tag">PostgreSQL</span>
               <span class="tech-tag">Drizzle ORM</span>
+              <span class="tech-tag">Supabase</span>
+              <span class="tech-tag">Tailwind CSS</span>
+              <span class="tech-tag">Recharts</span>
             </div>
 
             <div class="project-description">
               <p>
-                A subsidiarity-first <strong>liquid democracy</strong> prototype exploring how
-                different voting mechanisms affect collective decision-making. The core is a
-                fully-tested Python voting package implementing <strong>6 electoral methods</strong>:
-                Plurality, Approval, Instant Runoff (IRV), Borda Count, Condorcet with Ranked Pairs
-                (Tideman), and Quadratic Voting &mdash; with 144+ passing tests.
+                A hosted portfolio of democracy-mechanism demos exploring how voting rules,
+                representation constraints, preference modeling, and delegation networks change
+                collective outcomes. The current Vercel app organizes the project into four demos:
+                voting methods, apportionment/districting, preference-agent replay, and liquid democracy.
               </p>
               <p>
-                The web layer (Next.js + Supabase) provides proposal creation with structured intake
-                forms, ballot management, and domain/program-based topic organization. Designed to
-                eventually support topic-scoped delegation graphs and AI-assisted voting recommendations.
+                The core Python package implements plurality, approval, IRV, Borda, Ranked Pairs,
+                score, and quadratic voting with a FastAPI backend. The Next.js frontend adds
+                interactive scenario controls, cached districting artifacts, public replay mode for
+                preference-agent work, and placeholder routes that show the intended shape of the
+                remaining delegation simulator.
               </p>
             </div>
 
@@ -1229,8 +1373,20 @@
                 <button class="demo-tab" data-target="voting-liquid">Liquid Democracy</button>
               </div>
               <div class="demo-container">
-                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="voting-methods">
+                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="voting-methods" data-placeholder-delay="9000" data-retry-before-reveal="true">
                   <span class="demo-loading">Loading voting methods...</span>
+                  <div class="demo-placeholder">
+                    <span class="demo-placeholder__eyebrow">Starting hosted demo</span>
+                    <h4>Voting methods lab is loading</h4>
+                    <p>
+                      The hosted app may need a moment to wake its voting API before the scenario
+                      resolver is ready. This placeholder stays up briefly so the portfolio does not
+                      flash the app's transient connection error.
+                    </p>
+                    <a href="https://voting-paradigm.vercel.app/methods" target="_blank" rel="noreferrer">
+                      Open full demo
+                    </a>
+                  </div>
                   <iframe data-src="https://voting-paradigm.vercel.app/methods" title="Voting Paradigm Methods Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
@@ -1252,6 +1408,72 @@
               </div>
             </div>
 
+            <!-- Tab-specific explainers -->
+            <div class="tab-explainer" data-for-tab="voting-methods">
+              <div class="math-block">
+                <div class="math-block__title">Same Ballots, Different Winners</div>
+                <div class="math-block__description">
+                  The methods lab is the clearest technical core: one electorate is resolved through
+                  multiple electoral methods so users can see where plurality, approval, IRV, Borda,
+                  Ranked Pairs, score, and quadratic voting agree or diverge. The impressive part is
+                  not just computing a winner, but exposing each method's explanation and failure mode
+                  from the same reproducible scenario.
+                </div>
+              </div>
+              <div class="code-snippet">
+                <div class="code-snippet__header">
+                  <span class="code-snippet__lang">Python</span>
+                  <span class="code-snippet__file">voting/methods/condorcet.py</span>
+                </div>
+                <pre><code><span class="keyword">def</span> <span class="function">ranked_pairs</span>(pairwise_matrix, candidates):
+    <span class="string">"""Resolve Condorcet cycles by locking wins strongest-first."""</span>
+    victories = <span class="function">sort_pairwise_victories</span>(pairwise_matrix, candidates)
+    locked = <span class="function">defaultdict</span>(<span class="type">set</span>)
+    <span class="keyword">for</span> winner, loser, margin <span class="keyword">in</span> victories:
+        <span class="keyword">if not</span> <span class="function">creates_cycle</span>(locked, winner, loser):
+            locked[winner].<span class="function">add</span>(loser)
+    <span class="keyword">return</span> <span class="function">find_source</span>(locked, candidates)</code></pre>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="voting-districts">
+              <div class="math-block">
+                <div class="math-block__title">Apportionment and Balanced Districting</div>
+                <div class="math-block__description">
+                  This demo connects national representation to map-level representation. The
+                  apportionment view shows how additional House seats would be assigned under the
+                  Method of Equal Proportions, while the districting view uses cached geographic
+                  artifacts to compare population balance, compactness, and plan readiness. That makes
+                  representation trade-offs inspectable instead of abstract.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="voting-preferences">
+              <div class="math-block">
+                <div class="math-block__title">Preference Model Replay</div>
+                <div class="math-block__description">
+                  The preference-agent demo is intentionally public-replay first: it shows the product
+                  flow without requiring a live local LLM. A voter interview is converted into
+                  structured preference evidence, then into an auditable ballot preview. The relevant
+                  engineering work is the boundary between natural-language preference gathering and
+                  deterministic voting inputs.
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-explainer" data-for-tab="voting-liquid">
+              <div class="math-block">
+                <div class="math-block__title">Delegation Graph Simulator Shape</div>
+                <div class="math-block__description">
+                  The liquid democracy route currently documents the planned workflow: create voters,
+                  topics, and delegation edges; resolve transitive voting power; then compare direct
+                  outcomes against delegated outcomes. The portfolio presents this as a planned demo
+                  so the project roadmap is clear without overstating implementation status.
+                </div>
+              </div>
+            </div>
+
             <!-- Progress -->
             <div class="project-progress">
               <h4 class="project-progress__title">Current Progress</h4>
@@ -1266,49 +1488,6 @@
               </ul>
             </div>
 
-            <!-- Math: Quadratic Voting -->
-            <div class="math-block">
-              <div class="math-block__title">Quadratic Voting Cost Function</div>
-              <div class="math-block__formula">
-                cost(v) = v<sup>2</sup> credits<br />
-                net_score(candidate) = &Sigma; v<sub>i</sub> &nbsp;where&nbsp; &Sigma; v<sub>i</sub><sup>2</sup> &le; budget
-              </div>
-              <div class="math-block__description">
-                Voters allocate a fixed credit budget (default 100) across candidates. The quadratic
-                cost function means casting 5 votes costs 25 credits but casting 10 votes costs 100,
-                discouraging extreme positions and encouraging sincere preference revelation.
-                Negative votes (opposition) are supported.
-              </div>
-            </div>
-
-            <!-- Code: Condorcet -->
-            <div class="code-snippet">
-              <div class="code-snippet__header">
-                <span class="code-snippet__lang">Python</span>
-                <span class="code-snippet__file">voting/methods/condorcet.py</span>
-              </div>
-              <pre><code><span class="keyword">def</span> <span class="function">ranked_pairs</span>(pairwise_matrix, candidates):
-    <span class="string">"""Tideman's Ranked Pairs: resolve Condorcet cycles
-    by locking victories in order of margin strength."""</span>
-    victories = []
-    <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="function">combinations</span>(candidates, <span class="number">2</span>):
-        margin = pairwise_matrix[i][j] - pairwise_matrix[j][i]
-        <span class="keyword">if</span> margin <span class="operator">&gt;</span> <span class="number">0</span>:
-            victories.<span class="function">append</span>((i, j, margin))
-        <span class="keyword">elif</span> margin <span class="operator">&lt;</span> <span class="number">0</span>:
-            victories.<span class="function">append</span>((j, i, <span class="function">abs</span>(margin)))
-
-    <span class="comment"># Sort by margin desc, then winning votes, then tiebreak</span>
-    victories.<span class="function">sort</span>(key=<span class="keyword">lambda</span> v: v[<span class="number">2</span>], reverse=<span class="keyword">True</span>)
-
-    locked = <span class="function">defaultdict</span>(<span class="type">set</span>)
-    <span class="keyword">for</span> winner, loser, _ <span class="keyword">in</span> victories:
-        <span class="keyword">if not</span> <span class="function">creates_cycle</span>(locked, winner, loser):
-            locked[winner].<span class="function">add</span>(loser)
-
-    <span class="comment"># Winner: candidate with no incoming edges</span>
-    <span class="keyword">return</span> <span class="function">find_source</span>(locked, candidates)</code></pre>
-            </div>
           </div>
           <!-- /END Nebula Civitas -->
 

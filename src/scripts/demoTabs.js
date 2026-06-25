@@ -39,6 +39,7 @@ export default function initDemoTabs() {
               iframe.dataset.loaded = "true";
               const loading = targetWrapper.querySelector(".demo-loading");
               if (loading) loading.style.display = "none";
+              handleIframeReady(targetWrapper, iframe, canonicalUrl);
             });
 
             iframe.addEventListener("error", () => {
@@ -48,6 +49,7 @@ export default function initDemoTabs() {
             // Already loaded — reset to the canonical URL for this tab
             // so in-iframe navigation doesn't persist across tab switches
             iframe.src = canonicalUrl;
+            showIframePlaceholder(targetWrapper, iframe);
           }
         }
       }
@@ -86,6 +88,7 @@ export default function initDemoTabs() {
               iframe.dataset.loaded = "true";
               const loading = entry.target.querySelector(".demo-loading");
               if (loading) loading.style.display = "none";
+              handleIframeReady(entry.target, iframe, iframe.dataset.src);
             });
           }
           observer.unobserve(entry.target);
@@ -108,4 +111,35 @@ function handleIframeFallback(wrapper, url) {
     fallback.innerHTML = `This demo cannot be embedded. <a href="${url}" target="_blank" rel="noreferrer">Open in a new tab &rarr;</a>`;
   }
   if (iframe) iframe.style.display = "none";
+}
+
+function showIframePlaceholder(wrapper, iframe) {
+  const placeholder = wrapper.querySelector(".demo-placeholder");
+  if (!placeholder) return;
+
+  placeholder.style.display = "flex";
+  iframe.style.opacity = "0";
+}
+
+function handleIframeReady(wrapper, iframe, canonicalUrl) {
+  const placeholder = wrapper.querySelector(".demo-placeholder");
+  if (!placeholder) return;
+
+  showIframePlaceholder(wrapper, iframe);
+
+  const delay = Number.parseInt(wrapper.dataset.placeholderDelay || "0", 10);
+  const shouldRetry =
+    wrapper.dataset.retryBeforeReveal === "true" &&
+    iframe.dataset.placeholderRetried !== "true";
+
+  window.setTimeout(() => {
+    if (shouldRetry) {
+      iframe.dataset.placeholderRetried = "true";
+      iframe.src = canonicalUrl;
+      return;
+    }
+
+    placeholder.style.display = "none";
+    iframe.style.opacity = "1";
+  }, Number.isFinite(delay) ? delay : 0);
 }

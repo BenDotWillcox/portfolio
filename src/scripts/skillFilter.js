@@ -187,6 +187,7 @@ export default function initSkillFilter() {
     // Restore original order by data-project
     const originalOrder = [
       "valomapped",
+      "benbot",
       "wc-draw-sim",
       "march-madness",
       "cooper-viz",
