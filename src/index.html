@@ -45,7 +45,7 @@
           <a
             rel="noreferrer"
             class="cta-btn cta-btn--hero"
-            href="https://bendotwillcox.github.io/BenWillcox//files/Ben_Willcox_Resume.pdf"
+            href="assets/resume.pdf"
             target="_blank"
             style="margin-left: 1.2rem"
             >View Resume</a
@@ -74,33 +74,29 @@
           <div class="col-md-6 col-sm-12">
             <div class="about-wrapper__info load-hidden">
               <p class="about-wrapper__info-text">
-                I'm a Data Analyst at STARS Advanced Radiology Services, where I
-                build R Shiny dashboards, automate reporting pipelines, and use
-                SQL to drive insights that have led to a 60% reduction in unread
-                worklists and an 85% reduction in aged A/R. I hold a BS in
-                Economics with a Minor in Quantitative Data Analytics from
-                Michigan State University.
+                I am interested in using data science, machine learning, and
+                AI engineering to improve complex systems where better
+                intelligence can change how people make decisions.
               </p>
               <p class="about-wrapper__info-text">
-                Before my current role, I spent three summers as a Data Science
-                Intern at Byrne Electrical Specialists, building IoT data
-                pipelines, OEE dashboards, and statistical process control
-                models for manufacturing equipment.
+                The areas I keep coming back to are healthcare, economics,
+                social science, sports/esports, and civic decision-making
+                which all involve uncertainty, incentives, and workflows that
+                are difficult to model but meaningful to improve.
               </p>
               <p class="about-wrapper__info-text">
-                Outside of work, I channel my passion for data science into
-                sports analytics projects &mdash; building Elo rating systems,
-                Monte Carlo tournament simulations, and computer vision
-                pipelines. My goal is to transition into
-                <strong>machine learning and AI engineering</strong>, and the
-                projects below reflect that trajectory.
+                Recently I have been pushing deeper into
+                <strong>machine learning and AI engineering</strong> through
+                computer vision video pipelines, voting-method simulations,
+                LLM/tooling concepts, esports Elo models, Monte Carlo
+                forecasting, and full-stack data products.
               </p>
               <span class="d-flex mt-3">
                 <a
                   rel="noreferrer"
                   target="_blank"
                   class="cta-btn cta-btn--resume"
-                  href="https://bendotwillcox.github.io/BenWillcox//files/Ben_Willcox_Resume.pdf"
+                  href="assets/resume.pdf"
                 >
                   View Resume
                 </a>
@@ -1117,7 +1113,8 @@
               <p>
                 A <strong>computer vision pipeline</strong> that processes basketball game video to
                 detect players, track possessions, project movement onto a regulation court, and
-                prepare the data needed for automated shot charts and box scores. The current portfolio
+                prepare the data needed for automated shot charts and box scores. Play similarity
+                and clustering are planned analysis layers, not completed capabilities. The current portfolio
                 artifact is a generated static pipeline report with embedded tracking videos and status.
               </p>
               <p>
@@ -1192,14 +1189,16 @@
                     <h4>From tracked possessions to box scores</h4>
                     <p>
                       The remaining work is turning reliable tracks into basketball events: detect the
-                      shot window, associate the shooter, use OCR/game-clock evidence for player and
-                      time context, then export shot charts and box-score tables.
+                  shot window, associate the shooter, use OCR/game-clock evidence for player and
+                  time context, then add possession similarity analysis and export shot charts and
+                  box-score tables.
                     </p>
                     <div class="demo-panel__tags">
                       <span>Shot event detection</span>
                       <span>Jersey OCR</span>
                       <span>Clock parsing</span>
-                      <span>CSV export</span>
+                      <span>Play clustering</span>
+                      <span>Box-score export</span>
                     </div>
                   </div>
                 </div>
@@ -1267,44 +1266,36 @@
                 <li class="done">Player tracking (ByteTrack + SAM2 mask tracking)</li>
                 <li class="done">Team classification via color-based clustering</li>
                 <li class="done">Court homography (keypoint detection &rarr; pixel-to-feet transform)</li>
-                <li class="done">Possession segmentation & trajectory normalization</li>
-                <li class="done">DTW-based play clustering</li>
-                <li class="done">Stats export (shots.csv, box_score.csv)</li>
+                <li class="done">Possession segmentation & trajectory normalization foundation</li>
+                <li class="todo">Play similarity / DTW clustering validation</li>
+                <li class="todo">Production stats export (shots.csv, box_score.csv)</li>
                 <li class="todo">Shot event detection (jump shot &rarr; ball-in-basket window)</li>
                 <li class="todo">Jersey number OCR integration into main pipeline</li>
                 <li class="todo">Game clock parsing</li>
               </ul>
             </div>
 
-            <!-- Code: DTW clustering -->
+            <!-- Code: court homography -->
             <div class="code-snippet">
               <div class="code-snippet__header">
                 <span class="code-snippet__lang">Python</span>
-                <span class="code-snippet__file">hoopstats/clustering.py</span>
+                <span class="code-snippet__file">hoopstats/court_mapping.py</span>
               </div>
-              <pre><code><span class="keyword">def</span> <span class="function">compute_trajectory_distance</span>(traj_a, traj_b):
-    <span class="string">"""Compare two possessions using Dynamic Time Warping,
-    enabling similarity detection despite timing differences."""</span>
-    cost_matrix = <span class="function">cdist</span>(traj_a, traj_b, metric=<span class="string">'euclidean'</span>)
-    dtw_dist, _ = <span class="function">dtw_path</span>(cost_matrix)
-    <span class="keyword">return</span> dtw_dist
+              <pre><code><span class="keyword">def</span> <span class="function">project_track_to_court</span>(track, homography):
+    <span class="string">"""Map broadcast pixel positions into court coordinates."""</span>
+    pixel_points = <span class="function">np.asarray</span>(
+        [[frame.x, frame.y] <span class="keyword">for</span> frame <span class="keyword">in</span> track],
+        dtype=<span class="function">np.float32</span>
+    ).<span class="function">reshape</span>(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)
 
-<span class="keyword">def</span> <span class="function">cluster_plays</span>(possessions, threshold=<span class="number">15.0</span>):
-    <span class="string">"""Group similar possessions using hierarchical clustering
-    on a DTW distance matrix."""</span>
-    n = <span class="function">len</span>(possessions)
-    dist_matrix = <span class="function">np.zeros</span>((n, n))
-    <span class="keyword">for</span> i, j <span class="keyword">in</span> <span class="function">combinations</span>(<span class="function">range</span>(n), <span class="number">2</span>):
-        d = <span class="function">compute_trajectory_distance</span>(
-            possessions[i].trajectories,
-            possessions[j].trajectories
-        )
-        dist_matrix[i, j] = dist_matrix[j, i] = d
-    linkage = <span class="function">hierarchy.linkage</span>(
-        <span class="function">squareform</span>(dist_matrix), method=<span class="string">'ward'</span>
-    )
-    labels = <span class="function">hierarchy.fcluster</span>(linkage, threshold, criterion=<span class="string">'distance'</span>)
-    <span class="keyword">return</span> labels</code></pre>
+    court_points = <span class="function">cv2.perspectiveTransform</span>(
+        pixel_points, homography
+    ).<span class="function">reshape</span>(-<span class="number">1</span>, <span class="number">2</span>)
+
+    <span class="keyword">return</span> [
+        {<span class="string">"frame"</span>: frame.frame, <span class="string">"x_ft"</span>: x, <span class="string">"y_ft"</span>: y}
+        <span class="keyword">for</span> frame, (x, y) <span class="keyword">in</span> <span class="function">zip</span>(track, court_points)
+    ]</code></pre>
             </div>
           </div>
           <!-- /END HoopStats -->
