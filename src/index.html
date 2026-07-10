@@ -423,8 +423,14 @@
           <!-- ============ PROJECT 2: BenBot ============ -->
           <div class="project-card load-hidden" data-project="benbot">
             <div class="project-header">
-              <h3 class="project-title">BenBot &mdash; Personalized AI Chess Twin</h3>
-              <span class="status-badge status-badge--live">Live</span>
+              <h3 class="project-title">BenBot &mdash; Personalized Maia2 Chess Policy</h3>
+              <span
+                id="benbot-status"
+                class="status-badge status-badge--checking"
+                data-ready-url="https://bwillcox-benbot.hf.space/ready"
+                role="status"
+                aria-live="polite"
+              >Checking</span>
             </div>
 
             <div class="tech-tags">
@@ -439,15 +445,16 @@
 
             <div class="project-description">
               <p>
-                A playable chess bot trained to mirror my rapid-game decision patterns using a
-                personalized policy layered on top of <strong>Maia2</strong>. The system combines
-                Chess.com game ingestion, personal opening books, FEN/prefix-aware move prediction,
-                and a browser-based board served by a FastAPI backend.
+                A playable chess policy that blends pretrained <strong>Maia2</strong> move
+                probabilities with an inspectable count-based prior from my historical rapid games.
+                Validation selected exact-position (FEN) memory to personalize the choices; an
+                opening-prefix book remains an evaluated alternative. This is not a personally
+                fine-tuned neural model.
               </p>
               <p>
-                The live app exposes the bot's candidate moves, policy settings, and style source
-                for each decision. An optional <strong>Stockfish safety layer</strong> can veto major
-                blunders so the bot keeps my tendencies while avoiding obviously losing moves.
+                The live app exposes candidate probabilities, memory source, policy settings, and
+                <strong>Stockfish veto</strong> decisions. Its readiness badge distinguishes full
+                operation, optional-safety degradation, and model unavailability.
               </p>
             </div>
 
@@ -459,6 +466,14 @@
                 href="https://huggingface.co/spaces/Bwillcox/BenBot"
               >
                 See Live
+              </a>
+              <a
+                rel="noreferrer"
+                target="_blank"
+                class="cta-btn text-color-main"
+                href="https://huggingface.co/spaces/Bwillcox/BenBot/tree/main"
+              >
+                Public Files / Source
               </a>
             </div>
 
@@ -481,9 +496,10 @@
               <div class="math-block">
                 <div class="math-block__title">Personalized Maia2 Policy</div>
                 <div class="math-block__description">
-                  The bot scores legal moves using a combined strategy: Maia2 supplies the human-like
-                  chess prior, while personal move-prefix and position books nudge choices toward my
-                  historical tendencies. The UI surfaces the selected move, candidate probabilities,
+                  The deployed bot uses the validation-selected FEN strategy: Maia2 supplies the
+                  human-like chess prior, while exact-position move counts nudge choices toward my
+                  historical tendencies. Prefix memory was evaluated but is not part of the selected
+                  runtime blend. The UI surfaces the selected move, candidate probabilities,
                   book counts, and Stockfish veto status so each decision is inspectable.
                 </div>
               </div>

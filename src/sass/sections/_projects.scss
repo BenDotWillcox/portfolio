@@ -91,6 +91,33 @@
     }
   }
 
+  &--checking {
+    background: rgba($deploying-color, 0.1);
+    color: darken($deploying-color, 10%);
+
+    &::before {
+      background: $deploying-color;
+    }
+  }
+
+  &--degraded {
+    background: rgba($in-progress-color, 0.1);
+    color: darken($in-progress-color, 15%);
+
+    &::before {
+      background: $in-progress-color;
+    }
+  }
+
+  &--unavailable {
+    background: rgba(#dc2626, 0.1);
+    color: darken(#dc2626, 10%);
+
+    &::before {
+      background: #dc2626;
+    }
+  }
+
   &--in-progress {
     background: rgba($in-progress-color, 0.1);
     color: darken($in-progress-color, 10%);
