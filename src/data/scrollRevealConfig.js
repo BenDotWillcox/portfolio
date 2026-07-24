@@ -53,6 +53,14 @@ export const targetElements = [
     },
   },
   {
+    element: ".projects-intro, .project-index",
+    animation: {
+      delay: 300,
+      distance: "20px",
+      origin: "bottom",
+    },
+  },
+  {
     element: ".project-card",
     animation: {
       delay: 300,

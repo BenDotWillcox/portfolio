@@ -1,26 +1,28 @@
 {
-  "name": "simplefolio",
+  "name": "ben-willcox-portfolio",
   "version": "1.0.1",
-  "private": "true",
-  "description": "A clean, beautiful and responsive portfolio template for Developers!",
+  "private": true,
+  "description": "Ben Willcox's data science and machine learning project portfolio.",
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
     "build": "parcel build && npm run copy:hoopstats",
     "gh-pages-build": "parcel build --public-url . && npm run copy:hoopstats",
-    "copy:hoopstats": "node scripts/copy-hoopstats-assets.js"
+    "copy:hoopstats": "node scripts/copy-hoopstats-assets.js",
+    "test": "node --test tests/*.test.cjs",
+    "check": "npm test && npm run gh-pages-build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cobidev/simplefolio"
+    "url": "git+https://github.com/BenDotWillcox/portfolio.git"
   },
   "keywords": [],
-  "author": "Jacobo Martinez",
+  "author": "Ben Willcox",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cobidev/simplefolio/issues"
+    "url": "https://github.com/BenDotWillcox/portfolio/issues"
   },
-  "homepage": "https://github.com/cobidev/simplefolio#readme",
+  "homepage": "https://bendotwillcox.github.io/portfolio/",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
     "parcel": "^2.7.0",

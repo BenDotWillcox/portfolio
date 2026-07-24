@@ -12,8 +12,70 @@
   }
 }
 
+.projects-intro {
+  max-width: 74rem;
+  margin: -1rem auto 3rem;
+  color: darken($light-grey, 32%);
+  font-size: 1.6rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.project-index {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.2rem;
+  max-width: 96rem;
+  margin: 0 auto 6rem;
+
+  @include respond(tab-land) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include respond(phone) {
+    grid-template-columns: 1fr;
+    margin-bottom: 4rem;
+  }
+
+  a {
+    display: flex;
+    min-height: 9rem;
+    padding: 1.6rem;
+    border: 1px solid $tag-border;
+    border-radius: 0.8rem;
+    background: $tag-bg;
+    color: $dark-blue-text;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: $primary-color;
+      box-shadow: 0 0.8rem 2rem rgba($primary-color, 0.12);
+      color: $dark-blue-text;
+      transform: translateY(-2px);
+    }
+
+    span {
+      margin-bottom: 0.4rem;
+      color: $primary-color;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    strong {
+      font-size: 1.6rem;
+    }
+  }
+}
+
 // Individual project card
 .project-card {
+  scroll-margin-top: 2rem;
   margin-bottom: 6rem;
   padding-bottom: 6rem;
   border-bottom: 1px solid $light-grey;
@@ -277,6 +339,7 @@
     width: 100%;
     height: 100%;
     border: none;
+    transition: opacity 0.2s ease;
   }
 
   &--tall {

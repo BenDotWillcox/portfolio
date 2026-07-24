@@ -3,94 +3,61 @@
  * contextual explainer toggling for project demos.
  */
 export default function initDemoTabs() {
-  const tabButtons = document.querySelectorAll(".demo-tab");
-
-  tabButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const project = btn.closest(".project-card");
-      if (!project) return;
-
-      // Update active tab
-      project.querySelectorAll(".demo-tab").forEach((t) => t.classList.remove("active"));
-      btn.classList.add("active");
-
-      const targetId = btn.dataset.target;
-      const container = project.querySelector(".demo-container");
-      if (!container) return;
-
-      // Hide all iframe wrappers, external notices, and previews; show the target
-      container.querySelectorAll(".demo-iframe-wrapper, .demo-external-notice, .demo-preview").forEach((w) => {
-        w.style.display = "none";
-      });
-      const targetWrapper = container.querySelector(`#${targetId}`);
-      if (targetWrapper) {
-        targetWrapper.style.display = "block";
-
-        const iframe = targetWrapper.querySelector("iframe");
-        if (iframe && iframe.dataset.src) {
-          const canonicalUrl = iframe.dataset.src;
-
-          if (!iframe.src) {
-            // First load: set src and wire up load/error handlers
-            iframe.dataset.loaded = "loading";
-            iframe.src = canonicalUrl;
-
-            iframe.addEventListener("load", () => {
-              iframe.dataset.loaded = "true";
-              const loading = targetWrapper.querySelector(".demo-loading");
-              if (loading) loading.style.display = "none";
-              handleIframeReady(targetWrapper, iframe, canonicalUrl);
-            });
-
-            iframe.addEventListener("error", () => {
-              handleIframeFallback(targetWrapper, canonicalUrl);
-            });
-          } else {
-            // Already loaded — reset to the canonical URL for this tab
-            // so in-iframe navigation doesn't persist across tab switches
-            iframe.src = canonicalUrl;
-            showIframePlaceholder(targetWrapper, iframe);
-          }
-        }
-      }
-
-      // Toggle tab-specific explainers
-      project.querySelectorAll(".tab-explainer").forEach((ex) => {
-        if (ex.dataset.forTab === targetId) {
-          ex.style.display = "block";
-          ex.style.opacity = "0";
-          requestAnimationFrame(() => {
-            ex.style.transition = "opacity 0.3s ease";
-            ex.style.opacity = "1";
-          });
-        } else {
-          ex.style.display = "none";
-        }
-      });
-    });
+  document.querySelectorAll(".demo-tabs").forEach((tabList) => {
+    tabList.setAttribute("role", "tablist");
   });
 
-  // Auto-activate the first tab in each project on page load
+  const activateTab = (btn, loadDemo = true) => {
+    const project = btn.closest(".project-card");
+    if (!project) return;
+
+    project.querySelectorAll(".demo-tab").forEach((tab) => {
+      const isActive = tab === btn;
+      tab.classList.toggle("active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+    });
+
+    const targetId = btn.dataset.target;
+    const container = project.querySelector(".demo-container");
+    if (!container || !targetId) return;
+
+    container
+      .querySelectorAll(".demo-iframe-wrapper, .demo-external-notice, .demo-preview")
+      .forEach((wrapper) => {
+        wrapper.style.display = "none";
+      });
+
+    const targetWrapper = container.querySelector(`#${targetId}`);
+    if (targetWrapper) {
+      targetWrapper.style.display = "block";
+      if (loadDemo) loadIframe(targetWrapper);
+    }
+
+    project.querySelectorAll(".tab-explainer").forEach((explainer) => {
+      const isActive = explainer.dataset.forTab === targetId;
+      explainer.style.display = isActive ? "block" : "none";
+      explainer.style.opacity = isActive ? "1" : "0";
+    });
+  };
+
+  document.querySelectorAll(".demo-tab").forEach((btn) => {
+    btn.setAttribute("role", "tab");
+    btn.setAttribute("aria-controls", btn.dataset.target);
+    btn.addEventListener("click", () => activateTab(btn));
+  });
+
+  // Establish the initial tab state without loading every iframe on the page.
   document.querySelectorAll(".project-card").forEach((project) => {
     const firstTab = project.querySelector(".demo-tab");
-    if (firstTab) firstTab.click();
+    if (firstTab) activateTab(firstTab, false);
   });
 
-  // Intersection observer for lazy loading single-tab demos
+  // Load only the currently visible demo when its project approaches the viewport.
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const iframe = entry.target.querySelector("iframe[data-src]:not([src])");
-          if (iframe) {
-            iframe.src = iframe.dataset.src;
-            iframe.addEventListener("load", () => {
-              iframe.dataset.loaded = "true";
-              const loading = entry.target.querySelector(".demo-loading");
-              if (loading) loading.style.display = "none";
-              handleIframeReady(entry.target, iframe, iframe.dataset.src);
-            });
-          }
+        if (entry.isIntersecting && getComputedStyle(entry.target).display !== "none") {
+          loadIframe(entry.target);
           observer.unobserve(entry.target);
         }
       });
@@ -103,6 +70,44 @@ export default function initDemoTabs() {
   });
 }
 
+function loadIframe(wrapper) {
+  const iframe = wrapper.querySelector("iframe[data-src]");
+  if (!iframe || iframe.dataset.loaded === "loading" || iframe.dataset.loaded === "true") {
+    return;
+  }
+
+  const url = iframe.dataset.src;
+  const loading = wrapper.querySelector(".demo-loading");
+  const placeholder = wrapper.querySelector(".demo-placeholder");
+
+  iframe.dataset.loaded = "loading";
+  if (loading) loading.style.display = "block";
+  if (placeholder) placeholder.style.display = "flex";
+  iframe.style.opacity = "0";
+
+  iframe.addEventListener(
+    "load",
+    () => {
+      iframe.dataset.loaded = "true";
+      if (loading) loading.style.display = "none";
+      if (placeholder) placeholder.style.display = "none";
+      iframe.style.opacity = "1";
+    },
+    { once: true }
+  );
+
+  iframe.addEventListener(
+    "error",
+    () => {
+      iframe.dataset.loaded = "error";
+      handleIframeFallback(wrapper, url);
+    },
+    { once: true }
+  );
+
+  iframe.src = url;
+}
+
 function handleIframeFallback(wrapper, url) {
   const fallback = wrapper.querySelector(".demo-fallback");
   const iframe = wrapper.querySelector("iframe");
@@ -111,35 +116,4 @@ function handleIframeFallback(wrapper, url) {
     fallback.innerHTML = `This demo cannot be embedded. <a href="${url}" target="_blank" rel="noreferrer">Open in a new tab &rarr;</a>`;
   }
   if (iframe) iframe.style.display = "none";
-}
-
-function showIframePlaceholder(wrapper, iframe) {
-  const placeholder = wrapper.querySelector(".demo-placeholder");
-  if (!placeholder) return;
-
-  placeholder.style.display = "flex";
-  iframe.style.opacity = "0";
-}
-
-function handleIframeReady(wrapper, iframe, canonicalUrl) {
-  const placeholder = wrapper.querySelector(".demo-placeholder");
-  if (!placeholder) return;
-
-  showIframePlaceholder(wrapper, iframe);
-
-  const delay = Number.parseInt(wrapper.dataset.placeholderDelay || "0", 10);
-  const shouldRetry =
-    wrapper.dataset.retryBeforeReveal === "true" &&
-    iframe.dataset.placeholderRetried !== "true";
-
-  window.setTimeout(() => {
-    if (shouldRetry) {
-      iframe.dataset.placeholderRetried = "true";
-      iframe.src = canonicalUrl;
-      return;
-    }
-
-    placeholder.style.display = "none";
-    iframe.style.opacity = "1";
-  }, Number.isFinite(delay) ? delay : 0);
 }
