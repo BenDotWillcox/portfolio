@@ -49,6 +49,13 @@ npm run gh-pages-build
 the World Cup and Voting Paradigm embeds. The production build copies the
 self-contained HoopStats report into `dist/assets/hoopstats/`.
 
+## Résumé asset
+
+`src/assets/resume.pdf` is a PDF export of the canonical generic
+[`Ben_Willcox_Resume`](https://docs.google.com/document/d/1vd4lq9OxDnHliTiWZBYCyTGjsc6wZC1cSTn0f9rR33k)
+Google Doc. Export from that document rather than editing the tracked PDF
+directly.
+
 ## Deployment
 
 The repository's GitHub Pages workflow builds with:
