@@ -346,6 +346,35 @@
     padding-top: 68%;
     max-height: 760px;
   }
+
+  // Interactive apps need a usable viewport on phones; a width-derived
+  // desktop aspect ratio leaves only ~200px of vertical space.
+  &--mobile-viewport {
+    @include respond(phone) {
+      height: clamp(60rem, 82vh, 72rem);
+      min-height: 0;
+      max-height: none;
+      padding-top: 0;
+    }
+  }
+}
+
+#project-world-cup {
+  @include respond(phone) {
+    .demo-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      overflow-x: visible;
+    }
+
+    .demo-tab {
+      min-width: 0;
+      padding: 1rem 0.5rem;
+      font-size: 1.2rem;
+      line-height: 1.25;
+      white-space: normal;
+    }
+  }
 }
 
 .demo-loading {

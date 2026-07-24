@@ -504,7 +504,10 @@
                 <button class="demo-tab active" data-target="benbot-play">Play BenBot</button>
               </div>
               <div class="demo-container">
-                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="benbot-play">
+                <div
+                  class="demo-iframe-wrapper demo-iframe-wrapper--tall demo-iframe-wrapper--mobile-viewport"
+                  id="benbot-play"
+                >
                   <span class="demo-loading">Loading BenBot...</span>
                   <iframe data-src="https://bwillcox-benbot.hf.space" title="BenBot Chess Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
@@ -583,17 +586,28 @@
                 <button class="demo-tab" data-target="wc-path">Path Visualizer</button>
               </div>
               <div class="demo-container">
-                <div class="demo-iframe-wrapper" id="wc-draw">
+                <div
+                  class="demo-iframe-wrapper demo-iframe-wrapper--mobile-viewport"
+                  id="wc-draw"
+                >
                   <span class="demo-loading">Loading simulator...</span>
                   <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/?tab=visualizer" title="World Cup Visual Draw" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
-                <div class="demo-iframe-wrapper" id="wc-stats" style="display: none">
+                <div
+                  class="demo-iframe-wrapper demo-iframe-wrapper--mobile-viewport"
+                  id="wc-stats"
+                  style="display: none"
+                >
                   <span class="demo-loading">Loading Monte Carlo stats...</span>
                   <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/?tab=stats" title="World Cup Monte Carlo Stats" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
-                <div class="demo-iframe-wrapper" id="wc-path" style="display: none">
+                <div
+                  class="demo-iframe-wrapper demo-iframe-wrapper--mobile-viewport"
+                  id="wc-path"
+                  style="display: none"
+                >
                   <span class="demo-loading">Loading path visualizer...</span>
                   <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/?tab=map" title="World Cup Path Visualizer" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>

@@ -12,6 +12,10 @@ const revealConfig = fs.readFileSync(
   path.join(__dirname, "..", "src", "data", "scrollRevealConfig.js"),
   "utf8"
 );
+const projectsStyles = fs.readFileSync(
+  path.join(__dirname, "..", "src", "sass", "sections", "_projects.scss"),
+  "utf8"
+);
 
 const valuesFor = (attribute) =>
   [...html.matchAll(new RegExp(`(?:^|\\s)${attribute}="([^"]+)"`, "gm"))].map(
@@ -72,4 +76,20 @@ test("Voting methods embeds the deployed client without forced retry flags", () 
 
 test("the featured project guide participates in scroll reveal", () => {
   assert.match(revealConfig, /element:\s*"\.projects-intro, \.project-index"/);
+});
+
+test("World Cup and BenBot receive usable mobile iframe viewports", () => {
+  ["benbot-play", "wc-draw", "wc-stats", "wc-path"].forEach((id) => {
+    assert.match(
+      html,
+      new RegExp(
+        `class="[^"]*demo-iframe-wrapper--mobile-viewport[^"]*"\\s+id="${id}"`
+      )
+    );
+  });
+  assert.match(projectsStyles, /&--mobile-viewport[\s\S]*height:\s*clamp\(/);
+  assert.match(
+    projectsStyles,
+    /#project-world-cup[\s\S]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/
+  );
 });
