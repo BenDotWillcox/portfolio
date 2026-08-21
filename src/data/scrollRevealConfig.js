@@ -44,6 +44,15 @@ export const targetElements = [
     },
   },
   {
+    element: ".experience-card",
+    animation: {
+      delay: 300,
+      distance: "20px",
+      origin: "bottom",
+      interval: 150,
+    },
+  },
+  {
     element: ".skill-category",
     animation: {
       delay: 300,
