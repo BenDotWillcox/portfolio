@@ -1,0 +1,79 @@
+#experience {
+  background-color: $white-color;
+  color: $dark-blue-text;
+  margin-top: -15rem;
+  padding-top: 8rem;
+  padding-bottom: 3rem;
+
+  @include respond(tab-land) {
+    margin-top: 0;
+    padding-top: 5rem;
+  }
+
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.4rem;
+    margin-top: 3.2rem;
+
+    @include respond(tab-port) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .experience-card {
+    border: 1px solid $light-grey;
+    border-top: 3px solid $primary-color;
+    border-radius: 0.8rem;
+    padding: 2.6rem;
+    text-align: left;
+    box-shadow: 0 0.8rem 2.4rem rgba($dark-blue-text, 0.06);
+
+    &__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 1.6rem;
+
+      @include respond(phone) {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+    }
+
+    h3 {
+      color: $dark-blue-text;
+      font-size: 2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    p,
+    li {
+      font-size: 1.5rem;
+      line-height: 1.65;
+    }
+
+    ul {
+      margin: 1.4rem 0 0;
+      padding-left: 2rem;
+    }
+
+    li + li {
+      margin-top: 0.8rem;
+    }
+
+    &__role {
+      color: $primary-color;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    &__date {
+      color: darken($light-grey, 35%);
+      font-weight: 600;
+      margin: 0;
+      white-space: nowrap;
+    }
+  }
+}
