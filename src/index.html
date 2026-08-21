@@ -13,7 +13,7 @@
     />
     <meta
       name="description"
-      content="Ben Willcox — Analytics Engineer and Applied Data Scientist building production analytics, decision tools, and full-stack data products."
+      content="Ben Willcox — Analytics Engineer and Applied Data Scientist building production analytics, evaluated machine learning, simulation, and full-stack data products."
     />
 
     <link
@@ -74,22 +74,22 @@
           <div class="col-md-6 col-sm-12">
             <div class="about-wrapper__info load-hidden">
               <p class="about-wrapper__info-text">
-                I am interested in using data science, machine learning, and
-                AI engineering to improve complex systems where better
-                intelligence can change how people make decisions.
+                I build analytics and decision-support tools in healthcare, then
+                use independent projects to go deeper on machine learning,
+                simulation, computer vision, and data-product engineering.
               </p>
               <p class="about-wrapper__info-text">
-                The areas I keep coming back to are healthcare, economics,
-                social science, sports/esports, and civic decision-making
-                which all involve uncertainty, incentives, and workflows that
-                are difficult to model but meaningful to improve.
+                The common thread is uncertainty: how to turn incomplete or
+                noisy evidence into a useful model, test it honestly, and make
+                the result inspectable for the person using it.
               </p>
               <p class="about-wrapper__info-text">
                 I also apply
-                <strong>machine learning and software engineering</strong> through
-                computer vision video pipelines, voting-method simulations,
-                LLM/tooling concepts, esports Elo models, Monte Carlo
-                forecasting, and full-stack data products.
+                <strong>machine learning and software engineering</strong> across
+                production-style esports analytics, a constraint-tested World Cup
+                simulator, voting-method research, and a basketball computer-vision
+                pipeline. Each card separates what is working now from what is
+                still being validated.
               </p>
               <span class="d-flex mt-3">
                 <a
@@ -248,9 +248,31 @@
       <div class="container">
         <div class="project-wrapper">
           <h2 class="section-title dark-blue-text load-hidden">Projects</h2>
+          <p class="projects-intro load-hidden">
+            Start with the four projects that best show my current direction. Deployed demos and
+            source are linked where available; limitations and unfinished work are called out directly.
+          </p>
+          <nav class="project-index load-hidden" aria-label="Featured projects">
+            <a href="#project-valomapped">
+              <span>Model evaluation</span>
+              <strong>ValoMapped</strong>
+            </a>
+            <a href="#project-world-cup">
+              <span>Constraint systems</span>
+              <strong>World Cup Draw</strong>
+            </a>
+            <a href="#project-voting">
+              <span>Applied research</span>
+              <strong>Voting Paradigm</strong>
+            </a>
+            <a href="#project-hoopstats">
+              <span>Computer vision</span>
+              <strong>HoopStats</strong>
+            </a>
+          </nav>
 
           <!-- ============ PROJECT 1: ValoMapped ============ -->
-          <div class="project-card load-hidden" data-project="valomapped">
+          <div class="project-card load-hidden" id="project-valomapped" data-project="valomapped">
             <div class="project-header">
               <h3 class="project-title">ValoMapped &mdash; Esports Elo Analytics Platform</h3>
               <span class="status-badge status-badge--live">Live</span>
@@ -263,22 +285,21 @@
               <span class="tech-tag">PostgreSQL</span>
               <span class="tech-tag">Drizzle ORM</span>
               <span class="tech-tag">Supabase</span>
-              <span class="tech-tag">AWS RDS</span>
               <span class="tech-tag">Recharts</span>
               <span class="tech-tag">Tailwind CSS</span>
+              <span class="tech-tag">Temporal Backtesting</span>
             </div>
 
             <div class="project-description">
               <p>
-                A comprehensive analytics platform for VCT (Valorant Champions Tour) professional esports.
-                Features a custom <strong>map-specific Elo rating system</strong> where each team maintains
-                separate ratings across all competitive maps, enabling nuanced matchup analysis.
+                A full-stack analytics platform for professional Valorant with map-specific Elo ratings,
+                match probabilities, player ratings, tournament simulation, and interactive history.
               </p>
               <p>
-                Includes match win probability predictions, <strong>Monte Carlo tournament simulations</strong>
-                (Swiss, GSL, double elimination formats), interactive Elo history charts, player ratings,
-                pick/ban analysis, and a record book &mdash; all backed by a PostgreSQL database with automated
-                data ingestion via web scraping.
+                The strongest current evidence is a <strong>reproducible temporal backtest over 3,818
+                maps</strong> with validation/test separation, calibration, Brier score, log loss,
+                confidence intervals, and checked-in artifacts. External data collection is paused;
+                historical import tooling remains for reproducibility.
               </p>
             </div>
 
@@ -367,10 +388,11 @@
                   &Delta;Elo = K &times; MoV &times; (1 - E(win))
                 </div>
                 <div class="math-block__description">
-                  Each team holds <strong>separate Elo ratings per map</strong> &mdash; the rankings page
-                  shows these side by side. The margin-of-victory factor uses logarithmic scaling so
-                  blowouts shift ratings more than close games. K-factor (74) and rating scale (1000)
-                  were optimized via grid search to maximize prediction accuracy.
+                  Each team holds <strong>separate Elo ratings per map</strong>. Hyperparameters were
+                  selected on validation data before the chronological test period, and the published
+                  report compares the resulting model with plain Elo and a frozen historical production
+                  version. On the current test, plain Elo has the better Brier point estimate; the
+                  uncertainty interval does not establish a clear difference.
                 </div>
               </div>
             </div>
@@ -472,10 +494,11 @@
               <div class="math-block">
                 <div class="math-block__title">Pick/Ban Efficiency Analysis</div>
                 <div class="math-block__description">
-                  Analyzes each team&rsquo;s veto phase decisions by comparing <strong>actual picks and
-                  bans to the Elo-optimal selection</strong>. A dual-chart system visualizes cumulative
-                  Elo advantage and win probability deltas at each veto step, revealing whether teams
-                  are making strategically sound decisions or leaving rating points on the table.
+                  Compares actual veto choices with model-aligned alternatives as an exploratory
+                  association study. Lower-regret teams won slightly more often in the checked sample,
+                  but the interval includes no effect, and adding veto regret did not improve the
+                  outcome model. The project treats this as descriptive evidence, not a causal strategy
+                  recommendation.
                 </div>
               </div>
             </div>
@@ -545,7 +568,10 @@
                 <button class="demo-tab active" data-target="benbot-play">Play BenBot</button>
               </div>
               <div class="demo-container">
-                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="benbot-play">
+                <div
+                  class="demo-iframe-wrapper demo-iframe-wrapper--tall demo-iframe-wrapper--mobile-viewport"
+                  id="benbot-play"
+                >
                   <span class="demo-loading">Loading BenBot...</span>
                   <iframe data-src="https://bwillcox-benbot.hf.space" title="BenBot Chess Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
@@ -570,7 +596,7 @@
           <!-- /END BenBot -->
 
           <!-- ============ PROJECT 3: World Cup Draw ============ -->
-          <div class="project-card load-hidden" data-project="wc-draw-sim">
+          <div class="project-card load-hidden" id="project-world-cup" data-project="wc-draw-sim">
             <div class="project-header">
               <h3 class="project-title">World Cup 2026 Draw Simulator</h3>
               <span class="status-badge status-badge--live">Live</span>
@@ -586,16 +612,14 @@
 
             <div class="project-description">
               <p>
-                An interactive FIFA World Cup 2026 draw simulator that accurately models the official
-                tournament draw procedures with all FIFA constraints &mdash; confederation limits,
-                host placement rules, and side-pairing requirements (e.g., Spain/Argentina must be on
-                opposite bracket sides).
+                An unofficial, client-side model of the published 2026 World Cup draw procedure,
+                built from dated and versioned rule, team, schedule, and rating snapshots.
               </p>
               <p>
-                Uses <strong>recursive backtracking</strong> with constraint propagation to validate
-                every placement in real-time. Includes <strong>1 million pre-computed Monte Carlo
-                simulations</strong> using bitmask-optimized constraint checking for instant
-                probability lookups &mdash; group probabilities, opponent matchups, and stadium assignments.
+                A recursive backtracking engine enforces the documented placement invariants and is
+                exercised by regression fixtures, deterministic seed sweeps, and generated property
+                tests. Seeded million-trial artifacts support reference views, but the sampler is
+                <strong>not claimed to be uniform over every legal draw</strong>.
               </p>
             </div>
 
@@ -626,19 +650,30 @@
                 <button class="demo-tab" data-target="wc-path">Path Visualizer</button>
               </div>
               <div class="demo-container">
-                <div class="demo-iframe-wrapper" id="wc-draw">
+                <div
+                  class="demo-iframe-wrapper demo-iframe-wrapper--mobile-viewport"
+                  id="wc-draw"
+                >
                   <span class="demo-loading">Loading simulator...</span>
-                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Visual Draw" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/?tab=visualizer" title="World Cup Visual Draw" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
-                <div class="demo-iframe-wrapper" id="wc-stats" style="display: none">
+                <div
+                  class="demo-iframe-wrapper demo-iframe-wrapper--mobile-viewport"
+                  id="wc-stats"
+                  style="display: none"
+                >
                   <span class="demo-loading">Loading Monte Carlo stats...</span>
-                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Monte Carlo Stats" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/?tab=stats" title="World Cup Monte Carlo Stats" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
-                <div class="demo-iframe-wrapper" id="wc-path" style="display: none">
+                <div
+                  class="demo-iframe-wrapper demo-iframe-wrapper--mobile-viewport"
+                  id="wc-path"
+                  style="display: none"
+                >
                   <span class="demo-loading">Loading path visualizer...</span>
-                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/" title="World Cup Path Visualizer" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                  <iframe data-src="https://bendotwillcox.github.io/world-cup-draw/?tab=map" title="World Cup Path Visualizer" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
               </div>
@@ -649,11 +684,10 @@
               <div class="math-block">
                 <div class="math-block__title">Constraint Satisfaction via Recursive Backtracking</div>
                 <div class="math-block__description">
-                  The simulator enforces all FIFA rules in real-time: max 2 UEFA teams per group,
-                  max 1 from any other confederation, and <strong>side-pairing constraints</strong>
-                  (Spain/Argentina and France/England must land on opposite bracket sides). When you
-                  drag a team, the engine runs a chained backtracking validation across Pots 2&rarr;3&rarr;4
-                  to verify the remaining teams can still complete a valid draw.
+                  The simulator enforces the constraints represented in its checked-in rule snapshot:
+                  host reservations, pot positions, confederation caps, and the two published
+                  opposite-pathway pairs. Every interactive placement receives a chained feasibility
+                  check so a locally valid move cannot strand the remaining pots.
                 </div>
               </div>
               <div class="code-snippet">
@@ -682,13 +716,10 @@
               <div class="math-block">
                 <div class="math-block__title">Monte Carlo Statistics &mdash; 1 Million Simulated Draws</div>
                 <div class="math-block__description">
-                  The Monte Carlo tab exposes pre-computed statistics from 1 million simulated draws.
-                  Three views are available:
-                  <strong>Group Probabilities</strong> (color-coded matrix of each team&rsquo;s chance of
-                  landing in each group), <strong>Opponent Analysis</strong> (most likely opponents sorted
-                  by probability), and <strong>Stadium Forecast</strong> (venue likelihood based on group
-                  placement). The simulation uses <code>Int32Array</code> typed arrays and bitmask encoding
-                  to run all 1M iterations in ~200ms.
+                  The reference view exposes seeded, checked-in million-trial artifacts with input
+                  versions, hashes, uncertainty intervals, and a split-half stability diagnostic.
+                  Pre-draw probabilities describe this implementation&rsquo;s constrained sampler; the
+                  official-draw view uses a separate simplified Elo tournament model.
                 </div>
               </div>
             </div>
@@ -697,10 +728,9 @@
               <div class="math-block">
                 <div class="math-block__title">Path Visualizer &mdash; Travel and Knockout Routes</div>
                 <div class="math-block__description">
-                  The Path Visualizer connects draw outcomes to the tournament bracket and host-city map.
-                  For a selected team, it shows group-stage travel, possible knockout routes for first,
-                  second, or third-place finishes, conditional opponents by round, rest/travel summaries,
-                  and the stadium sequence implied by the bracket path.
+                  The Path Visualizer is intentionally based on the checked-in official draw, not the
+                  scenario created in Visual Draw. For a selected team it shows scheduled group travel,
+                  possible knockout routes, conditional opponents, rest/travel summaries, and venues.
                 </div>
               </div>
             </div>
@@ -1167,7 +1197,7 @@
           <!-- /END PGA Golf Course Analysis -->
 
           <!-- ============ PROJECT 6: HoopStats ============ -->
-          <div class="project-card load-hidden" data-project="hoopstats">
+          <div class="project-card load-hidden" id="project-hoopstats" data-project="hoopstats">
             <div class="project-header">
               <h3 class="project-title">HoopStats &mdash; AI Basketball Box Score</h3>
               <span class="status-badge status-badge--in-progress">In Progress</span>
@@ -1189,18 +1219,15 @@
 
             <div class="project-description">
               <p>
-                A <strong>computer vision pipeline</strong> that processes basketball game video to
-                detect players, track possessions, project movement onto a regulation court, and
-                prepare the data needed for automated shot charts and box scores. Play similarity
-                and clustering are planned analysis layers, not completed capabilities. The current portfolio
-                artifact is a generated static pipeline report with embedded tracking videos and status.
+                A staged <strong>basketball computer-vision pipeline</strong> for detection, player
+                tracking, team assignment, jersey OCR, court homography, trajectory export, and a
+                generated visual report.
               </p>
               <p>
-                Uses Roboflow RF-DETR for multi-class detection, ByteTrack plus SAM2-style mask
-                tracking for identity continuity, color clustering for team labels, and
-                <strong>homography transformation</strong> to convert broadcast pixels into court
-                coordinates in feet. Shot-event detection, OCR, and game-clock parsing remain the
-                next production steps.
+                A heuristic extension now groups shot attempts, classifies make/miss, attributes the
+                shooter, and exports <code>shots.csv</code> and <code>box_score.csv</code>. Annotation
+                and evaluation tools are implemented, but there is not yet a concise public benchmark;
+                the repository documents missed poses, ID switches, OCR limits, and other failure modes.
               </p>
             </div>
 
@@ -1221,7 +1248,7 @@
                 <button class="demo-tab active" data-target="hoopstats-pipeline">Pipeline Report</button>
                 <button class="demo-tab" data-target="hoopstats-tracking">Tracking</button>
                 <button class="demo-tab" data-target="hoopstats-court-map">Court Mapping</button>
-                <button class="demo-tab" data-target="hoopstats-roadmap">Box Score Roadmap</button>
+                <button class="demo-tab" data-target="hoopstats-roadmap">Box Score Extension</button>
               </div>
               <div class="demo-container">
                 <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="hoopstats-pipeline">
@@ -1250,9 +1277,9 @@
                     <span class="demo-panel__eyebrow">Current capability</span>
                     <h4>Pixel-to-court projection</h4>
                     <p>
-                      Player tracks are transformed from broadcast pixels into real court coordinates
-                      using a calibrated homography, enabling top-down possession views and eventual
-                      2PT/3PT shot-location classification.
+                      Player tracks are transformed from broadcast pixels into court coordinates
+                      using a calibrated homography. The event layer uses the projected release
+                      location to classify 2PT/3PT attempts when a usable transform is available.
                     </p>
                     <div class="demo-panel__tags">
                       <span>OpenCV</span>
@@ -1263,20 +1290,19 @@
                 </div>
                 <div class="demo-external-notice" id="hoopstats-roadmap" style="display: none">
                   <div class="demo-panel demo-panel--soon">
-                    <span class="demo-panel__eyebrow">Next build step</span>
-                    <h4>From tracked possessions to box scores</h4>
+                    <span class="demo-panel__eyebrow">Implemented, still being evaluated</span>
+                    <h4>Heuristic shot log and box-score extension</h4>
                     <p>
-                      The remaining work is turning reliable tracks into basketball events: detect the
-                  shot window, associate the shooter, use OCR/game-clock evidence for player and
-                  time context, then add possession similarity analysis and export shot charts and
-                  box-score tables.
+                      The current extension groups shot-pose detections, pairs makes to recent
+                      attempts, assigns a tracked shooter, reads a visible jersey when possible, and
+                      exports shot and box-score tables. The next proof is a scoped labeled benchmark,
+                      not a claim of full-game production accuracy.
                     </p>
                     <div class="demo-panel__tags">
                       <span>Shot event detection</span>
                       <span>Jersey OCR</span>
-                      <span>Clock parsing</span>
-                      <span>Play clustering</span>
                       <span>Box-score export</span>
+                      <span>Ground-truth evaluation</span>
                     </div>
                   </div>
                 </div>
@@ -1325,12 +1351,12 @@
 
             <div class="tab-explainer" data-for-tab="hoopstats-roadmap">
               <div class="math-block">
-                <div class="math-block__title">Event Layer Still In Progress</div>
+                <div class="math-block__title">Heuristic Event Layer, Explicit Scope</div>
                 <div class="math-block__description">
-                  The tracking layer is useful by itself, but the box-score product depends on an
-                  event layer that can identify a jump-shot motion, locate the ball/rim interaction,
-                  resolve the shooter, and attach time/player metadata. The portfolio now states that
-                  boundary clearly instead of implying the full scorer is production-ready.
+                  The event layer is implemented but intentionally described as heuristic. It depends
+                  on learned action detections plus hand-built timing, overlap, OCR, and geometry rules.
+                  Free throws are out of scope, unidentified shooters remain explicit, and evaluation
+                  can be restricted to marked live-play segments.
                 </div>
               </div>
             </div>
@@ -1344,12 +1370,11 @@
                 <li class="done">Player tracking (ByteTrack + SAM2 mask tracking)</li>
                 <li class="done">Team classification via color-based clustering</li>
                 <li class="done">Court homography (keypoint detection &rarr; pixel-to-feet transform)</li>
-                <li class="done">Possession segmentation & trajectory normalization foundation</li>
-                <li class="todo">Play similarity / DTW clustering validation</li>
-                <li class="todo">Production stats export (shots.csv, box_score.csv)</li>
-                <li class="todo">Shot event detection (jump shot &rarr; ball-in-basket window)</li>
-                <li class="todo">Jersey number OCR integration into main pipeline</li>
-                <li class="todo">Game clock parsing</li>
+                <li class="done">Heuristic shot detection, make/miss, attribution, and 2PT/3PT classification</li>
+                <li class="done">Shot-log and box-score CSV export</li>
+                <li class="done">Annotation, segment marking, and evaluation reports</li>
+                <li class="todo">Publish a reproducible benchmark on a clearly scoped sample</li>
+                <li class="todo">Improve missed-shot and attribution failure modes; free throws remain out of scope</li>
               </ul>
             </div>
 
@@ -1379,15 +1404,14 @@
           <!-- /END HoopStats -->
 
           <!-- ============ PROJECT 6: Nebula Civitas ============ -->
-          <div class="project-card load-hidden" data-project="nebula-civitas">
+          <div class="project-card load-hidden" id="project-voting" data-project="nebula-civitas">
             <div class="project-header">
-              <h3 class="project-title">Nebula Civitas &mdash; Voting Mechanisms Platform</h3>
+              <h3 class="project-title">Voting Paradigm &mdash; Democracy Methods Lab</h3>
               <span class="status-badge status-badge--in-progress">In Progress</span>
             </div>
 
             <div class="tech-tags">
               <span class="tech-tag">Python</span>
-              <span class="tech-tag">FastAPI</span>
               <span class="tech-tag">Next.js</span>
               <span class="tech-tag">TypeScript</span>
               <span class="tech-tag">React</span>
@@ -1400,17 +1424,17 @@
 
             <div class="project-description">
               <p>
-                A hosted portfolio of democracy-mechanism demos exploring how voting rules,
-                representation constraints, preference modeling, and delegation networks change
-                collective outcomes. The current Vercel app organizes the project into four demos:
-                voting methods, apportionment/districting, preference-agent replay, and liquid democracy.
+                A deployed set of democracy-mechanism demos exploring how voting rules,
+                representation constraints, and preference modeling change collective outcomes.
+                The methods lab, apportionment/districting views, and public preference replay are
+                usable now; Liquid Democracy is explicitly presented as planned.
               </p>
               <p>
                 The core Python package implements plurality, approval, IRV, Borda, Ranked Pairs,
-                score, and quadratic voting with a FastAPI backend. The Next.js frontend adds
-                interactive scenario controls, cached districting artifacts, public replay mode for
-                preference-agent work, and placeholder routes that show the intended shape of the
-                remaining delegation simulator.
+                score, and quadratic voting with a dedicated test suite. The methods demo resolves
+                the same synthetic electorate under every rule, the representation demo applies the
+                Method of Equal Proportions, and the preference page runs in public-safe replay mode
+                with live LLM proxying disabled in production.
               </p>
             </div>
 
@@ -1429,7 +1453,7 @@
                 class="cta-btn text-color-main"
                 href="https://github.com/BenDotWillcox/voting-paradigm"
               >
-                Source Code
+                Python Package Source
               </a>
             </div>
 
@@ -1442,20 +1466,8 @@
                 <button class="demo-tab" data-target="voting-liquid">Liquid Democracy</button>
               </div>
               <div class="demo-container">
-                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="voting-methods" data-placeholder-delay="9000" data-retry-before-reveal="true">
+                <div class="demo-iframe-wrapper demo-iframe-wrapper--tall" id="voting-methods">
                   <span class="demo-loading">Loading voting methods...</span>
-                  <div class="demo-placeholder">
-                    <span class="demo-placeholder__eyebrow">Starting hosted demo</span>
-                    <h4>Voting methods lab is loading</h4>
-                    <p>
-                      The hosted app may need a moment to wake its voting API before the scenario
-                      resolver is ready. This placeholder stays up briefly so the portfolio does not
-                      flash the app's transient connection error.
-                    </p>
-                    <a href="https://voting-paradigm.vercel.app/methods" target="_blank" rel="noreferrer">
-                      Open full demo
-                    </a>
-                  </div>
                   <iframe data-src="https://voting-paradigm.vercel.app/methods" title="Voting Paradigm Methods Demo" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
                   <div class="demo-fallback"></div>
                 </div>
@@ -1484,15 +1496,15 @@
                 <div class="math-block__description">
                   The methods lab is the clearest technical core: one electorate is resolved through
                   multiple electoral methods so users can see where plurality, approval, IRV, Borda,
-                  Ranked Pairs, score, and quadratic voting agree or diverge. The impressive part is
-                  not just computing a winner, but exposing each method's explanation and failure mode
-                  from the same reproducible scenario.
+                  Ranked Pairs, score, and quadratic voting agree or diverge. Each outcome includes
+                  its method-specific basis and trade-offs, keeping the comparison inspectable rather
+                  than treating one rule as universally best.
                 </div>
               </div>
               <div class="code-snippet">
                 <div class="code-snippet__header">
                   <span class="code-snippet__lang">Python</span>
-                  <span class="code-snippet__file">voting/methods/condorcet.py</span>
+                  <span class="code-snippet__file">voting/methods/ranked_pairs.py</span>
                 </div>
                 <pre><code><span class="keyword">def</span> <span class="function">ranked_pairs</span>(pairwise_matrix, candidates):
     <span class="string">"""Resolve Condorcet cycles by locking wins strongest-first."""</span>
@@ -1547,13 +1559,11 @@
             <div class="project-progress">
               <h4 class="project-progress__title">Current Progress</h4>
               <ul class="project-progress__list">
-                <li class="done">Voting mechanisms package (6 methods, 144+ tests)</li>
-                <li class="done">FastAPI backend with CORS support</li>
-                <li class="done">Database schema & migrations (Drizzle ORM)</li>
-                <li class="done">Voting methods comparison demo</li>
-                <li class="done">Algorithmic apportionment and districting demo</li>
-                <li class="todo">Preference-agent walkthrough polish and public replay assets</li>
-                <li class="todo">Liquid democracy delegation graph simulator</li>
+                <li class="done">Seven-method Python resolution package with dedicated tests</li>
+                <li class="done">Deployed voting-method comparison with deterministic scenario controls</li>
+                <li class="done">Apportionment and districting views</li>
+                <li class="done">Public-safe preference-agent replay; live LLM route disabled in production</li>
+                <li class="todo">Liquid democracy delegation graph simulator (placeholder route only)</li>
               </ul>
             </div>
 

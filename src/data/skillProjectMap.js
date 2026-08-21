@@ -113,7 +113,6 @@ const skillProjectMap = {
   ],
   FastAPI: [
     { project: "benbot", relevance: 5, bestTab: "benbot-play" },
-    { project: "nebula-civitas", relevance: 4, bestTab: "voting-methods" },
   ],
   "Tailwind CSS": [
     { project: "valomapped", relevance: 5, bestTab: "valo-rankings" },
